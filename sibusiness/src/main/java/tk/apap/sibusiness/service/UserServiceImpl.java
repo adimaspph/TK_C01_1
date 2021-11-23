@@ -7,6 +7,7 @@ import tk.apap.sibusiness.model.UserModel;
 import tk.apap.sibusiness.repository.UserDB;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -26,5 +27,10 @@ public class UserServiceImpl implements UserService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(password);
         return hashedPassword;
+    }
+
+    @Override
+    public List<UserModel> getUserList() {
+        return userDB.findAll();
     }
 }

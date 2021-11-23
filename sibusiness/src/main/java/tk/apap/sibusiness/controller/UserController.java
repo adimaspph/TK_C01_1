@@ -38,4 +38,11 @@ public class UserController {
         userService.addUser(user);
         return "home";
     }
+
+    @GetMapping("/viewall")
+    private String viewAllUser(Model model){
+        List<UserModel> listUser = userService.getUserList();
+        model.addAttribute("listUser", listUser);
+        return "viewall-user";
+    }
 }
