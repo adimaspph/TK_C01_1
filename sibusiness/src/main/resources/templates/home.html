@@ -11,6 +11,7 @@
 <nav th:replace="fragments/fragment :: navbar"></nav>
 
 <div class="container">
+    <h2 th:text=" 'Hello ' +  ${#httpServletRequest.remoteUser} + '!'"> Login As</h2>
     <br>
     <h1 class="text-center">Home</h1>
     <br>
