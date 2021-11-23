@@ -34,18 +34,8 @@ public class UserModel {
     private String username;
 
 //    @NotNull
-//    @Size(max = 50)
-//    @Column(name = "nama", nullable = false)
-//    private String nama;
-//
-//    @NotNull
-//    @Size(max = 50)
-//    @Column(name = "email", nullable = false, unique = true)
-//    private String email;
-
-    @NotNull
-    @Column(name = "role", nullable = false)
-    private Integer role;
+//    @Column(name = "role", nullable = false)
+//    private Integer role;
 
     @NotNull
     @Lob
