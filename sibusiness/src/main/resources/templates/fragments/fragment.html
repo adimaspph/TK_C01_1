@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <head th:fragment="head">
+        <link rel="stylesheet" th:href="@{/css/style.css}"/>
         <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
         <script
             src="http://code.jquery.com/jquery-3.4.1.min.js"
@@ -20,10 +21,9 @@
 </head>
 <body>
 
-    <nav th:fragment="navbar" class="navbar navbar-dark bg-info navbar-expand-lg">
+    <nav th:fragment="navbar" class="navbar navbar-dark bg-navy navbar-expand-lg">
 
         <a class="navbar-brand font-weight-bold text-brown" href="#">
-            <img src="https://cdn-icons-png.flaticon.com/512/3799/3799884.png" height="28">
             SI-Business
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
