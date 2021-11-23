@@ -7,6 +7,10 @@ import tk.apap.sibusiness.model.UserModel;
 import tk.apap.sibusiness.repository.UserDB;
 
 import javax.transaction.Transactional;
+<<<<<<< HEAD
+=======
+import java.util.List;
+>>>>>>> 3e7d908ae955262a03ddfd8f420fa42848fa38c9
 
 @Service
 @Transactional
@@ -27,4 +31,12 @@ public class UserServiceImpl implements UserService {
         String hashedPassword = passwordEncoder.encode(password);
         return hashedPassword;
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public List<UserModel> getUserList() {
+        return userDB.findAll();
+    }
+>>>>>>> 3e7d908ae955262a03ddfd8f420fa42848fa38c9
 }

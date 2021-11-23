@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+  <meta charset="UTF-8">
+  <title> Home </title>
+  <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+  <br>
+  <h2>Daftar Seluruh User</h2>
+  <br>
+  <div th:each="user : ${listUser}" class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <p th:text="'ID : ' + ${user.uuid}"></p>
+        <p th:text="'Username : ' + ${user.username}"></p>
+        <p th:text="'Role : ' + ${user.role.role}"></p>
+        <br>
+        <a class="btn btn-primary bg-navy">Update User</a>
+        <!--                <a sec:authorize="hasAuthority('MANAGER_BUSINESS') " class="btn btn-primary" th:href="@{/user/delete/} + ${user.id}">Delete User</a>-->
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="d-flex justify-content-right">
+    <a class="mx-2 btn btn-primary bg-navy" th:href="@{/user/add/}">Add User</a>
+    <a class="mx-2 btn btn-primary bg-navy" href="/">Home</a>
+  </div>
+</div>
+</div>
+<br>
+
+</body>
+
+</html>
