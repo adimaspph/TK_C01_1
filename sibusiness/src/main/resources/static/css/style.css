@@ -5,3 +5,16 @@
 .bg-navy {
     background-color: #091353 !important;
 }
+
+.sibusiness {
+  color: #3d56b2;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  letter-spacing: -1px;
+}
+
+.full-screen {
+  padding: 8rem 0;
+}
