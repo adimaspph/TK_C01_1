@@ -30,11 +30,11 @@ C01-Kelompok 1-SI-BUSINESS
 
 | NPM        | Nama Lengkap           | Fitur yang akan diselesaikan |
 | ---------- | ---------------------- | ---------------------------- |
-| 1906305575 | Adimas Putra Pratama H |                              |
-| 1906399240 | Meliana Hana Fatasya   |                              |
-| 1906399436 | Della Patricia Siregar |                              |
-| 1906319006 | Karimah                |                              |
-| 1906299162 | Siti Noer Cholizzhah H |                              |
+| 1906305575 | Adimas Putra Pratama H |   7, 13                           |
+| 1906399240 | Meliana Hana Fatasya   |  17                            |
+| 1906399436 | Della Patricia Siregar |   9                           |
+| 1906319006 | Karimah                |  14                       |
+| 1906299162 | Siti Noer Cholizzhah H |    8                          |
 
 ---
 
@@ -42,10 +42,10 @@ C01-Kelompok 1-SI-BUSINESS
 
 | NPM        | Nama Lengkap           | Fitur yang akan diselesaikan |
 | ---------- | ---------------------- | ---------------------------- |
-| 1906305575 | Adimas Putra Pratama H |                              |
-| 1906399240 | Meliana Hana Fatasya   |                              |
-| 1906399436 | Della Patricia Siregar |                              |
-| 1906319006 | Karimah                |                              |
-| 1906299162 | Siti Noer Cholizzhah H |                              |
+| 1906305575 | Adimas Putra Pratama H |    10                          |
+| 1906399240 | Meliana Hana Fatasya   |    11                          |
+| 1906399436 | Della Patricia Siregar |    16                          |
+| 1906319006 | Karimah                |      15                        |
+| 1906299162 | Siti Noer Cholizzhah H |    12                          |
 
 ---
