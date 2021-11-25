@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Buku</title>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+</head>
+
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br>
+
+<div class="container rounded-lg bg-white">
+    <br>
+    <h2 class="text-center font-weight-bold">Update User</h2>
+    <br>
+    <div class="col">
+        <form th:action="@{/user/update}" th:object="${user}" method="POST">
+            <input type="hidden" th:field="*{uuid}" />
+
+            UUID : <br>
+            <input disabled class="form-control" type="text" name="uuid" th:value="*{uuid}" />
+            <br><br>
+
+            Username : <br>
+            <input required class="form-control" type="text" name="username" th:value="*{username}" />
+            <br><br>
+
+            Password : <br>
+            <input required class="form-control" type="password" name="password" th:value="*{password}" />
+            <br><br>
+
+            Role : <br>
+            <select th:field="*{role}" name="role" class="form-control">
+                <option th:each="role:${listRole}" th:value="${role.id}" th:text="${role.role}"></option>
+            </select>
+            <br><br>
+
+            <a th:href="@{/user/viewall}" class="btn btn-outline-primary" >Back</a>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

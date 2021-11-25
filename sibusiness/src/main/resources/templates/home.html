@@ -10,21 +10,19 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 
-<div class="container">
-    <h2 th:text=" 'Hello ' +  ${#httpServletRequest.remoteUser} + '!'"> Login As</h2>
-    <br>
-    <h1 class="text-center">Home</h1>
-    <br>
-
-    <div class="d-flex justify-content-center">
-        <a th:href="@{/user/viewall}" class="mx-2 btn btn-primary">Lihat Daftar User</a>
+<div class="d-flex justify-content-center" style="padding-top: 70px;">
+    <div class="m-4">
+        <h1 class="animation-1" style="text-align:center" th:text="'Hello ' + ${#httpServletRequest.remoteUser} + '!'">Login as</h1>
+        <h1 class="animation-1" style="text-align:center">
+            <span class="mr-2">Selamat datang di</span>
+            <span class="sibusiness">SI-Business.</span>
+        </h1>
+        <p class="animation-2" style="text-align:center">Sebuah sistem informasi yang dibangun untuk mengelola bisnis, khususnya bisnis APAP.</p>
+        <div class="my-3 mt-4 d-flex justify-content-center animation-3">
+            <a href="#" class="btn btn-primary">Button</a>
+            <a sec:authorize="hasAuthority('Manager Business')" th:href="@{/user/viewall}" class="mx-2 btn btn-outline-primary">Lihat Daftar User</a>
+        </div>
     </div>
-
-    <div class="col">
-
-    </div>
-
 </div>
-
 </body>
 </html>

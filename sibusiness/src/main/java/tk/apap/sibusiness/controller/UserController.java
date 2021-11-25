@@ -1,12 +1,10 @@
 package tk.apap.sibusiness.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import tk.apap.sibusiness.model.RoleModel;
 import tk.apap.sibusiness.model.UserModel;
 import tk.apap.sibusiness.service.RoleService;
@@ -44,5 +42,30 @@ public class UserController {
         List<UserModel> listUser = userService.getUserList();
         model.addAttribute("listUser", listUser);
         return "viewall-user";
+    }
+
+    @GetMapping("/update/{username}")
+    private String formUpdateUser(
+            Model model,
+            @PathVariable String username
+    ){
+        UserModel user = userService.getUserByUsername(username);
+        List<RoleModel> listRole = roleService.getListRole();
+
+        user.setPassword("");
+
+        model.addAttribute("user", user);
+        model.addAttribute("listRole", listRole);
+        return "form-update-user";
+    }
+
+    @PostMapping("/update")
+    private String updateUser(
+            Model model,
+            @ModelAttribute UserModel user
+    ){
+        userService.updateUser(user);
+        model.addAttribute("pesan", "User dengan username: " + user.getUsername() + " berhasil diupdate!!");
+        return "message";
     }
 }
