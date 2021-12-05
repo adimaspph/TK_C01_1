@@ -11,10 +11,12 @@ import org.springframework.stereotype.Service;
 import tk.apap.sibusiness.model.UserModel;
 import tk.apap.sibusiness.repository.UserDB;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserDB userDB;
