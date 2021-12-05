@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
-                .antMatchers("/user/**").hasAnyAuthority("Manager Business")
+//                .antMatchers("/user/**").hasAnyAuthority("Manager Business")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -45,14 +45,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
 
-    @Qualifier("userDetailsServiceImpl")
-    @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
-    }
+//    @Qualifier("userDetailsServiceImpl")
+//    @Autowired
+//    private UserDetailsService userDetailsService;
+//
+//    @Autowired
+//    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
+//        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
+//    }
 }
 
 
