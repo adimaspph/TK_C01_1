@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Lainnya ###
+!**/src/main/resources/application.properties
