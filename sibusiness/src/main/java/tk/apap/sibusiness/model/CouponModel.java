@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.util.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,7 +22,7 @@ import java.util.UUID;
 @Getter
 @Entity
 @Table(name="coupon")
-public class CouponModel {
+public class CouponModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,12 +47,20 @@ public class CouponModel {
 
     @NotNull
     @Column(nullable = false)
-    private Date expiryDate;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate expiryDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "creator", referencedColumnName = "uuid", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private UserModel creator;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = TypeModel.class)
+    @JoinTable(
+            name = "type_coupon",
+            joinColumns = @JoinColumn(name = "coupon_id"),
+            inverseJoinColumns = @JoinColumn(name = "type_id")
+    )
+    private Set<TypeModel> listType = new HashSet<>();
 }

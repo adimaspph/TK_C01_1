@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface CouponService {
         List<CouponModel> getCouponList();
+        void addCoupon(CouponModel coupon, String username);
+        String generateCouponCode(CouponModel couponModel);
 }
