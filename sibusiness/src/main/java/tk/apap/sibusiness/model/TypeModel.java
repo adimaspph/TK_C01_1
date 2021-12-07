@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -29,11 +30,6 @@ public class TypeModel implements Serializable {
     @Column(nullable = false)
     private String useDay;
 
-    @ManyToMany
-    @JoinTable(
-            name = "type_coupon",
-            joinColumns = @JoinColumn(name = "type_id"),
-            inverseJoinColumns = @JoinColumn(name = "coupon_id")
-    )
-    Set<CouponModel> listCoupon;
+    @ManyToMany(mappedBy = "listType", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = CouponModel.class)
+    private Set<CouponModel> listCoupon = new HashSet<>();
 }

@@ -14,10 +14,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,7 +29,7 @@ public class CouponModel implements Serializable {
 
     @NotNull
     @Column(nullable = false)
-    private Integer status;
+    private Boolean status;
 
     @NotNull
     @Size(max = 16)
@@ -59,6 +56,11 @@ public class CouponModel implements Serializable {
     @JsonIgnore
     private UserModel creator;
 
-    @ManyToMany(mappedBy = "listCoupon")
-    Set<TypeModel> ListType;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = TypeModel.class)
+    @JoinTable(
+            name = "type_coupon",
+            joinColumns = @JoinColumn(name = "coupon_id"),
+            inverseJoinColumns = @JoinColumn(name = "type_id")
+    )
+    private Set<TypeModel> listType = new HashSet<>();
 }

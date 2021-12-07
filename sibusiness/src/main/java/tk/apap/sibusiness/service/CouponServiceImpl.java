@@ -3,6 +3,7 @@ package tk.apap.sibusiness.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.apap.sibusiness.model.CouponModel;
+import tk.apap.sibusiness.model.UserModel;
 import tk.apap.sibusiness.repository.CouponDB;
 
 import javax.transaction.Transactional;
@@ -26,9 +27,15 @@ public class CouponServiceImpl implements CouponService{
     public void addCoupon(CouponModel coupon, String username) {
         String code = generateCouponCode(coupon);
         coupon.setCouponCode(code);
-        System.out.println(userService.getUserByUsername(username));
-        coupon.setCreator(userService.getUserByUsername(username));
-        coupon.setStatus(0);
+        UserModel user = userService.getUserByUsername(username);
+        coupon.setCreator(user);
+
+        if (user.getRole().getRole().equals("Staff_Marketing")) {
+            coupon.setStatus(true);
+        } else {
+            coupon.setStatus(false);
+        }
+//        System.out.println(coupon.getListType());
         couponDB.save(coupon);
     }
 

@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <form th:action="@{/coupon/add}" th:object="${coupon}" method="post">
                         <label>Coupon Name</label>
-                        <input type="text" th:value="*{couponName}" name="couponName" class="form-control">
+                        <input type="text" th:value="*{couponName}" name="couponName" maxlength="20" class="form-control">
 
                         <br>
                         <label>Discount</label>
