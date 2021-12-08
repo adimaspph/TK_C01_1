@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+  <meta charset="UTF-8">
+  <title> Daftar Request Pembuatan Item </title>
+  <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+  <br>
+  <h2>Daftar Item Request</h2>
+  <br>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>No</th>
+      <th>Nama</th>
+      <th>Harga</th>
+      <th>Stok</th>
+      <th>Kategori</th>
+      <th>Cluster</th>
+      <th>Status</th>
+      <div sec:authorize="hasAuthority('Manager Business')">
+        <th></th>
+        <th>Action</th>
+      </div>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="itemRequest, iterationStatus: ${listItemRequest}">
+      <td th:text="${iterationStatus.count}"></td>
+      <td th:text="${itemRequest.nama}"></td>
+      <td th:text="${itemRequest.harga}"></td>
+      <td th:text="${itemRequest.stok}"></td>
+      <td th:text="${itemRequest.kategori}"></td>
+      <td th:text="${itemRequest.cluster}"></td>
+      <td th:if="${itemRequest.status} == 0">Permintaan belum disetujui</td>
+      <td th:if="${itemRequest.status} == 1">Permintaan disetujui</td>
+      <td th:if="${itemRequest.status} == 2">Permintaan ditolak</td>
+      <div sec:authorize="hasAuthority('Manager Business')">
+        <td>
+          <a class="btn btn-primary" th:href="@{/}">Setuju</a>
+        </td>
+        <td>
+          <a class="btn btn-danger" th:href="@{/}">Tolak</a>
+        </td>
+      </div>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+<br>
+
+</body>
+
+</html>
