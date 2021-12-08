@@ -21,6 +21,7 @@
         <div class="my-3 mt-4 d-flex justify-content-center animation-3">
 <!--            <a href="#" class="btn btn-primary">Button</a>-->
             <a th:href="@{/coupon/viewall}" class="mx-2 btn btn-primary">Lihat Daftar Coupon</a>
+            <a th:href="@{/coupon/viewall-creation-request}" class="mx-2 btn btn-primary">Lihat Permintaan Pembuatan Coupon</a>
             <a sec:authorize="hasAnyAuthority('Staff_Product', 'Staff_Marketing')" th:href="@{/coupon/add}" class="mx-2 btn btn-outline-primary">Tambah Coupon</a>
         </div>
         <div class="my-3 mt-4 d-flex justify-content-center animation-3">

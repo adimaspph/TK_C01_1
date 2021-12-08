@@ -8,6 +8,7 @@ import tk.apap.sibusiness.repository.CouponDB;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -43,5 +44,23 @@ public class CouponServiceImpl implements CouponService{
     public String generateCouponCode(CouponModel couponModel) {
         //Belum diimplement
         return "dummycode";
+    }
+
+    @Override
+    public List<CouponModel> getCouponCreationList() {
+        return couponDB.listCouponCreation();
+    }
+
+    @Override
+    public void acceptRequest(Long idCoupon) {
+        Optional<CouponModel> couponModel = couponDB.findById(idCoupon);
+        CouponModel coupon = couponModel.get();
+        coupon.setStatus(true);
+        couponDB.save(coupon);
+    }
+
+    @Override
+    public void deleteCoupon(Long idCoupon) {
+        couponDB.deleteById(idCoupon);
     }
 }
