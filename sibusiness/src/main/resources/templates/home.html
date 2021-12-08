@@ -24,6 +24,9 @@
             <a sec:authorize="hasAnyAuthority('Staff_Product', 'Staff_Marketing')" th:href="@{/coupon/add}" class="mx-2 btn btn-outline-primary">Tambah Coupon</a>
         </div>
         <div class="my-3 mt-4 d-flex justify-content-center animation-3">
+            <a th:href="@{/item/viewall}" class="mx-2 btn btn-primary">Lihat Daftar Item</a>
+        </div>
+        <div class="my-3 mt-4 d-flex justify-content-center animation-3">
             <a sec:authorize="hasAuthority('Manager Business')" th:href="@{/user/viewall}" class="mx-2 btn btn-outline-primary">Lihat Daftar User</a>
         </div>
     </div>
