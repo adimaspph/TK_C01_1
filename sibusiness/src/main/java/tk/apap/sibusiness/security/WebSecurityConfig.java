@@ -1,6 +1,7 @@
 package tk.apap.sibusiness.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,8 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
-                .antMatchers("/user/add").permitAll()
-                .antMatchers("/").permitAll()
+                .antMatchers("/user/**").hasAnyAuthority("Manager Business")
+                .antMatchers("/coupon/add/**").hasAnyAuthority("Staff_Product", "Staff_Marketing")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -36,21 +37,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         return new BCryptPasswordEncoder();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .passwordEncoder(encoder())
-                .withUser("lala").password(encoder().encode("lala"))
-                .roles("Manager Business");
-    }
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .passwordEncoder(encoder())
+//                .withUser("manager").password(encoder().encode("manager"))
+//                .roles("Manager Business");
+//    }
 
-/*    @Autowired
+
+    @Qualifier("userDetailsServiceImpl")
+    @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
-    }*/
+    }
 }
 
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Coupon</title>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header"><b>Tambah Coupon Baru</b></div>
+                <div class="card-body">
+                    <form th:action="@{/coupon/add}" th:object="${coupon}" method="post">
+                        <label>Coupon Name</label>
+                        <input type="text" th:value="*{couponName}" name="couponName" maxlength="20" class="form-control">
+
+                        <br>
+                        <label>Discount</label>
+                        <input type="number" th:value="*{discountAmount}" name="discountAmount" class="form-control">
+
+                        <br>
+                        <label>ExpiryDate</label>
+                        <input type="date" th:value="*{expiryDate}" name="expiryDate" class="form-control">
+
+                        <br>
+                        <label>Coupon Type</label>
+                        <div class="card p-md-2">
+                            <div class="form-check" th:each="type, iterationStatus : ${listCouponType}">
+                                <input class="form-check-input"
+                                       type="checkbox"
+                                       th:field="*{listType}"
+                                       th:value="${type.id}"
+                                       th:id="${type.id}">
+                                <label class="form-check-label" th:for="${type.id}" th:text="${type.useDay}"></label>
+                            </div>
+                        </div>
+
+                        <br>
+                        <button type="submit" class="btn btn-warning">Save</button>
+                        <a class="btn btn-link" href="/">Home</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

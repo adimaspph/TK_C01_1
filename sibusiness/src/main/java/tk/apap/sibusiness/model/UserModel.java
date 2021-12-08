@@ -13,13 +13,14 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 @Entity
-@Table(name="user")
+@Table(name="userModel")
 public class UserModel {
 
     @Id
@@ -33,16 +34,6 @@ public class UserModel {
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-//    @NotNull
-//    @Size(max = 50)
-//    @Column(name = "nama", nullable = false)
-//    private String nama;
-//
-//    @NotNull
-//    @Size(max = 50)
-//    @Column(name = "email", nullable = false, unique = true)
-//    private String email;
-//
 //    @NotNull
 //    @Column(name = "role", nullable = false)
 //    private Integer role;
@@ -58,4 +49,9 @@ public class UserModel {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private RoleModel role;
+
+    @OneToMany(mappedBy = "creator", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private List<CouponModel> couponUser;
 }

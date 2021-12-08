@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Viewall Item </title>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <br>
+    <h1 class="text-center">Daftar Seluruh Item</h1>
+    <div sec:authorize="hasAuthority('Manager Business')">
+        <br>
+        <a class="btn btn-primary" th:href="@{/}">Daftar Request Item Baru</a>
+        <br>
+    </div>
+
+    <div th:each="listKategori, iterationStatus1: ${listAllItem}">
+        <br>
+        <h3 th:text="${iterationStatus1.count} + '. KATEGORI '+ ${listKategori[0].get('kategori')}"></h3>
+        <table class="table table-bordered">
+            <thead class="table-info">
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Harga</th>
+                <th>Stok</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item, iterationStatus2: ${listKategori}">
+                <td th:text="${iterationStatus2.count}"></td>
+                <td th:text="${item.get('nama')}"></td>
+                <td th:text="${item.get('harga')}"></td>
+                <td th:text="${item.get('stok')}"></td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{/item/} + ${item.get('uuid')}">Detail</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+<br>
+
+</body>
+
+</html>
