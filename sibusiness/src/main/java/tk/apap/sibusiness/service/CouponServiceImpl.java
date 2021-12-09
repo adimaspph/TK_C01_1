@@ -9,6 +9,7 @@ import tk.apap.sibusiness.model.UserModel;
 import tk.apap.sibusiness.repository.CouponDB;
 
 import javax.transaction.Transactional;
+import java.text.DecimalFormat;
 import java.util.*;
 
 @Service
@@ -39,6 +40,7 @@ public class CouponServiceImpl implements CouponService{
             coupon.setStatus(true);
         } else {
             coupon.setStatus(false);
+            coupon.setCouponCode("");
         }
         couponDB.save(coupon);
     }
@@ -65,7 +67,17 @@ public class CouponServiceImpl implements CouponService{
         Optional<CouponModel> couponModel = couponDB.findById(idCoupon);
         CouponModel coupon = couponModel.get();
         coupon.setStatus(true);
+
+        String code = couponRestService.generateCouponCode(coupon);
+        coupon.setCouponCode(code);
+
         couponDB.save(coupon);
+    }
+
+    @Override
+    public void deleteListType(Long idCoupon) {
+        couponDB.findById(idCoupon).get().setListType(null);
+        couponDB.save(couponDB.findById(idCoupon).get());
     }
 
     @Override
