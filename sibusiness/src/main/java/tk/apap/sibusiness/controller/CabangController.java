@@ -1,25 +1,11 @@
 package tk.apap.sibusiness.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-import tk.apap.sibusiness.model.CouponModel;
-import tk.apap.sibusiness.model.RoleModel;
-import tk.apap.sibusiness.model.UserModel;
-import tk.apap.sibusiness.rest.CabangDetail;
+import tk.apap.sibusiness.rest.CabangDTO;
 import tk.apap.sibusiness.service.CabangRestService;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util. ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.time.LocalTime;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/cabang")
@@ -30,13 +16,13 @@ public class CabangController {
 
     @GetMapping("/create")
     private String addUserFormPage(Model model) {
-        CabangDetail cabang = new CabangDetail();
+        CabangDTO cabang = new CabangDTO();
         model.addAttribute("cabang", cabang);
         return "form-buka-cabang";
     }
 
     @PostMapping(value = "/create")
-    private String addUserSubmit(@ModelAttribute CabangDetail cabang, Model model) {
+    private String addUserSubmit(@ModelAttribute CabangDTO cabang, Model model) {
 //        System.out.println(cabang.getNamaCabang());
 //        System.out.println(cabang.getAlamatCabang());
 //        System.out.println(cabang.getNoTelpCabang());

@@ -7,18 +7,18 @@ import java.util.Date;
 
 @Getter @Setter
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class CabangDetail {
+public class CabangDTO {
     private String status;
 
-    @JsonProperty("nama")
-    private String nama;
+    @JsonProperty("namaCabang")
+    private String namaCabang;
 
-    @JsonProperty("alamat")
-    private String alamat;
+    @JsonProperty("alamatCabang")
+    private String alamatCabang;
 
-    @JsonProperty("no_telp")
-    private String no_telp;
+    @JsonProperty("noTelpCabang")
+    private String noTelpCabang;
 
-    @JsonProperty("ukuran")
-    private Integer ukuran;
+    @JsonProperty("ukuranCabang")
+    private Integer ukuranCabang;
 }

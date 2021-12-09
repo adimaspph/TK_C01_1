@@ -17,16 +17,16 @@
                 <div class="card-body">
                     <form th:action="@{/cabang/create}" th:object="${cabang}" method="POST">
                         <label>Nama Cabang</label>
-                        <input type="text" name="nama" class="form-control">
+                        <input type="text" name="namaCabang" class="form-control">
 
                         <label>Alamat Cabang</label>
-                        <input type="text" name="alamat" class="form-control">
+                        <input type="text" name="alamatCabang" class="form-control">
 
                         <label>No Telepon Cabang</label>
-                        <input type="text" name="no_telp" class="form-control">
+                        <input type="text" name="noTelpCabang" class="form-control">
 
                         <label>Ukuran</label>
-                        <input type="number" name="ukuran" class="form-control">
+                        <input type="number" name="ukuranCabang" class="form-control">
 
                         <br>
                         <button type="submit" class="btn btn-warning">Submit</button>

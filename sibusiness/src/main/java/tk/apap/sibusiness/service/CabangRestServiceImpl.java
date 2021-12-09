@@ -1,8 +1,7 @@
 package tk.apap.sibusiness.service;
 
 import reactor.core.publisher.Mono;
-import tk.apap.sibusiness.rest.BaseResponse;
-import tk.apap.sibusiness.rest.CabangDetail;
+import tk.apap.sibusiness.rest.CabangDTO;
 
 
 import org.springframework.http.MediaType;
@@ -11,8 +10,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import tk.apap.sibusiness.rest.Setting;
 
 import javax.transaction.Transactional;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @Transactional
@@ -24,19 +21,20 @@ public class CabangRestServiceImpl implements CabangRestService{
     }
 
     @Override
-    public Mono<String> permintaanCabang(CabangDetail cabang) {
+    public Mono<String> permintaanCabang(CabangDTO cabang) {
 
 
-        System.out.println(Mono.just(cabang).block());
+//        System.out.println(Mono.just(cabang).block());
         Mono<String> a = this.webClient
                 .post()
-                .uri("/api/cabang/create")
+                .uri("/api/cabang")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(Mono.just(cabang), CabangDetail.class)
+                .body(Mono.just(cabang), CabangDTO.class)
+//                .bodyValue(cabang)
                 .accept(MediaType.ALL)
                 .retrieve()
                 .bodyToMono(String.class);
-        System.out.println(a.block());
+//        System.out.println(a.block());
         return a;
     }
 }

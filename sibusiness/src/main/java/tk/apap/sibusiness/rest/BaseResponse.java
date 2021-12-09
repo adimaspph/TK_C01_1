@@ -3,7 +3,7 @@ package tk.apap.sibusiness.rest;
 public class BaseResponse {
     private int status;
     private String message;
-    private CabangDetail result;
+    private CabangDTO result;
 
     public int getStatus() {
         return status;
@@ -13,7 +13,7 @@ public class BaseResponse {
         return message;
     }
 
-    public CabangDetail getResult() {
+    public CabangDTO getResult() {
         return result;
     }
 
@@ -25,7 +25,7 @@ public class BaseResponse {
         this.message = message;
     }
 
-    public void setResult(CabangDetail result) {
+    public void setResult(CabangDTO result) {
         this.result = result;
     }
 }
