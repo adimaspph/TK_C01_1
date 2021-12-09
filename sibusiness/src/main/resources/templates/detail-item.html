@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Item</title>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <br>
+            <div class="card">
+                <div class="card-header bg-biru text-white"><h4 class="text-center">Detail Item</h4></div>
+                <div class="card-body">
+                    <p><b>ID Item : </b><label th:text="${item.get('uuid')}"></label></p>
+                    <p><b>Nama Item : </b><label th:text="${item.get('nama')}"></label></p>
+                    <p><b>Harga Item : </b><label th:text="${item.get('harga')}"></label></p>
+                    <p><b>Stok Item : </b><label th:text="${item.get('stok')}"></label></p>
+                    <p><b>Kategori : </b><label th:text="${item.get('kategori')}"></label></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
