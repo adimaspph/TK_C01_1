@@ -62,9 +62,25 @@ public class UserController {
     @PostMapping("/update")
     private String updateUser(
             Model model,
+            @RequestParam("passLama") String passLama,
+            @RequestParam("passKonfirm") String passKonfirm,
             @ModelAttribute UserModel user
     ){
-        userService.updateUser(user);
+        UserModel userLama = userService.getUserByUuid(user.getUuid());
+        List<RoleModel> listRole = roleService.getListRole();
+        Integer result =  userService.updateUser(user, passLama, passKonfirm);
+
+        model.addAttribute("listRole", listRole);
+        if (result == -1){
+            model.addAttribute("user", userLama);
+            model.addAttribute("error", "Password Lama Salah");
+            return "form-update-user";
+        } else if (result == 0) {
+            model.addAttribute("user", userLama);
+            model.addAttribute("error", "Password Konfirmasi Salah");
+            return "form-update-user";
+        }
+
         model.addAttribute("pesan", "User dengan username: " + user.getUsername() + " berhasil diupdate!!");
         return "message";
     }

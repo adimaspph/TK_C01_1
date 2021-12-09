@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Update Buku</title>
+    <title>Update User</title>
     <object th:include="fragments/fragment :: head" th:remove="tag"></object>
 </head>
 
@@ -10,38 +10,53 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-biru text-white"><h4 class="text-center">Update User</h4></div>
+                <div class="card-body">
+                    <form th:action="@{/user/update}" th:object="${user}" method="POST">
+                        <input type="hidden" th:field="*{uuid}" />
 
-<div class="container rounded-lg bg-white">
-    <br>
-    <h2 class="text-center font-weight-bold">Update User</h2>
-    <br>
-    <div class="col">
-        <form th:action="@{/user/update}" th:object="${user}" method="POST">
-            <input type="hidden" th:field="*{uuid}" />
+                        <div th:if="${error}">
+                            <span style="color: red" th:text="${error}"></span>
+                            <br>
+                        </div>
 
-            UUID : <br>
-            <input disabled class="form-control" type="text" name="uuid" th:value="*{uuid}" />
-            <br><br>
+                        UUID : <br>
+                        <input disabled class="form-control" type="text" name="uuid" th:value="*{uuid}" />
+                        <br>
 
-            Username : <br>
-            <input required class="form-control" type="text" name="username" th:value="*{username}" />
-            <br><br>
+                        Username : <br>
+                        <input required class="form-control" type="text" name="username" th:value="*{username}" />
+                        <br>
 
-            Password : <br>
-            <input required class="form-control" type="password" name="password" th:value="*{password}" />
-            <br><br>
+                        Password Lama: <br>
+                        <input required class="form-control" type="password" name="passLama" value="" />
+                        <br>
 
-            Role : <br>
-            <select th:field="*{role}" name="role" class="form-control">
-                <option th:each="role:${listRole}" th:value="${role.id}" th:text="${role.role}"></option>
-            </select>
-            <br><br>
+                        Password Baru: <br>
+                        <input required class="form-control" type="password" name="password" value="" />
+                        <br>
 
-            <a th:href="@{/user/viewall}" class="btn btn-outline-primary" >Back</a>
-            <button class="btn btn-primary" type="submit">Submit</button>
-        </form>
+                        Konfirmasi Password Baru: <br>
+                        <input required class="form-control" type="password" name="passKonfirm" value="" />
+                        <br>
+
+                        Role : <br>
+                        <select th:field="*{role}" name="role" class="form-control">
+                            <option th:each="role:${listRole}" th:value="${role.id}" th:text="${role.role}"></option>
+                        </select>
+                        <br>
+
+                        <a th:href="@{/user/viewall}" class="btn btn-outline-primary" >Back</a>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
 </body>
 </html>

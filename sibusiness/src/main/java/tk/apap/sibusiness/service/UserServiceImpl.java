@@ -23,15 +23,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserModel updateUser(UserModel user) {
-        String pass = encrypt(user.getPassword());
-        user.setPassword(pass);
-        return userDB.save(user);
+    public Integer updateUser(UserModel user, String passLama, String passKonfirm) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        UserModel userLama = getUserByUuid(user.getUuid());
+
+        if (!passKonfirm.equals(user.getPassword())) {
+            return 0;
+        }
+
+        if (passwordEncoder.matches(passLama , userLama.getPassword())) {
+            String pass = encrypt(user.getPassword());
+            user.setPassword(pass);
+            userDB.save(user);
+            return 1;
+        }
+        return -1;
     }
 
     @Override
     public UserModel getUserByUsername(String username) {
         return userDB.findByUsername(username);
+    }
+
+    @Override
+    public UserModel getUserByUuid(String uuid) {
+        return userDB.findUserModelByUuid(uuid);
     }
 
     @Override
