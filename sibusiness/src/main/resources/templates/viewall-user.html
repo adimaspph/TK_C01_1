@@ -20,15 +20,15 @@
         <p th:text="'Username : ' + ${user.username}"></p>
         <p th:text="'Role : ' + ${user.role.role}"></p>
         <br>
-        <a class="btn btn-primary bg-navy" sec:authorize="hasAuthority('Manager Business')" th:href="@{/user/update/} + ${user.username}">Update User</a>
+        <a class="btn btn-primary" sec:authorize="hasAuthority('Manager Business')" th:href="@{/user/update/} + ${user.username}">Update User</a>
         <!--                <a sec:authorize="hasAuthority('MANAGER_BUSINESS') " class="btn btn-primary" th:href="@{/user/delete/} + ${user.id}">Delete User</a>-->
       </div>
     </div>
   </div>
   <br>
   <div class="d-flex justify-content-right">
-    <a class="mx-2 btn btn-primary bg-navy" sec:authorize="hasAuthority('Manager Business')" th:href="@{/user/add/}">Add User</a>
-    <a class="mx-2 btn btn-primary bg-navy" href="/">Home</a>
+    <a class="mx-2 btn btn-primary" sec:authorize="hasAuthority('Manager Business')" th:href="@{/user/add/}">Add User</a>
+    <a class="mx-2 btn btn-primary" href="/">Home</a>
   </div>
 </div>
 </div>

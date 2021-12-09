@@ -6,7 +6,8 @@ import java.util.List;
 public interface UserService {
     UserModel addUser(UserModel user);
     String encrypt(String password);
-    UserModel updateUser(UserModel user);
+    Integer updateUser(UserModel user, String passLama, String passKonfirm);
     UserModel getUserByUsername(String username);
+    UserModel getUserByUuid(String uuid);
     List<UserModel> getUserList();
 }
