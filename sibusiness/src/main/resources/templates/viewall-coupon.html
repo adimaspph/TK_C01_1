@@ -42,7 +42,7 @@
             <div sec:authorize="hasAuthority('Staff_Marketing')">
                 <!--fitur nomor 10-->
                 <td>
-                    <a class="btn btn-primary" th:href="@{/}">Ubah</a>
+                    <a class="btn btn-primary" th:href="@{/coupon/update/} + ${coupon.id}">Ubah</a>
                 </td>
                 <!--fitur nomor 11-->
                 <td>
