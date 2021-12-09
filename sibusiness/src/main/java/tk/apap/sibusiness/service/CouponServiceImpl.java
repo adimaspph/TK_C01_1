@@ -1,5 +1,6 @@
 package tk.apap.sibusiness.service;
 
+import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.apap.sibusiness.model.CouponModel;
@@ -34,9 +35,9 @@ public class CouponServiceImpl implements CouponService{
         coupon.setCreator(user);
 
         if (user.getRole().getRole().equals("Staff_Marketing")) {
-            coupon.setStatus(true);
             String code = couponRestService.generateCouponCode(coupon);
             coupon.setCouponCode(code);
+            coupon.setStatus(true);
         } else {
             coupon.setStatus(false);
             coupon.setCouponCode("");
@@ -45,8 +46,20 @@ public class CouponServiceImpl implements CouponService{
     }
 
     @Override
+    public void updateCoupon(CouponModel coupon) {
+        CouponModel couponLama = getCouponById(coupon.getId());
+        couponLama.setListType(new HashSet<>());
+        couponDB.save(coupon);
+    }
+
+    @Override
     public List<CouponModel> getCouponCreationList() {
         return couponDB.listCouponCreation();
+    }
+
+    @Override
+    public CouponModel getCouponById(Long id) {
+        return couponDB.findCouponModelById(id);
     }
 
     @Override

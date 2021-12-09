@@ -32,6 +32,6 @@ public class TypeModel implements Serializable {
     @Column(nullable = false)
     private String useDay;
 
-    @ManyToMany(mappedBy = "listType", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = CouponModel.class)
+    @ManyToMany(mappedBy = "listType", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST}, targetEntity = CouponModel.class)
     private Set<CouponModel> listCoupon = new HashSet<>();
 }

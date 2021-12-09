@@ -31,9 +31,8 @@ public class CouponModel implements Serializable {
     @Column(nullable = false)
     private Boolean status;
 
-    @NotNull
     @Size(max = 16)
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String couponCode;
 
     @NotNull
@@ -56,8 +55,7 @@ public class CouponModel implements Serializable {
     @JsonIgnore
     private UserModel creator;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = TypeModel.class)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST}, targetEntity = TypeModel.class)
     @JoinTable(
             name = "type_coupon",
             joinColumns = @JoinColumn(name = "coupon_id"),

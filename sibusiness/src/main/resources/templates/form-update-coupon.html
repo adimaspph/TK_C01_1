@@ -2,9 +2,10 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Coupon</title>
+    <title>Update Coupon</title>
     <object th:include="fragments/fragment :: head" th:remove="tag"></object>
 </head>
+
 
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
@@ -13,15 +14,39 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header bg-biru text-white"><h4 class="text-center">Tambah Coupon Baru</h4></div>
+                <div class="card-header bg-biru text-white"><h4 class="text-center">Update Coupon</h4></div>
                 <div class="card-body">
-                    <form th:action="@{/coupon/add}" th:object="${coupon}" method="post">
+                    <form th:action="@{/coupon/update}" th:object="${coupon}" method="POST">
+                        <input type="hidden" th:field="*{id}" />
+
                         <label>Coupon Name</label>
                         <input type="text" th:value="*{couponName}" name="couponName" maxlength="20" class="form-control">
 
                         <br>
+                        <input type="hidden" th:field="*{couponCode}" />
+                        <label>Coupon Code</label>
+                        <input disabled type="text" th:value="*{couponCode}" name="couponCode" class="form-control">
+
+                        <br>
+                        <input type="hidden" th:field="*{creator.uuid}" />
+                        <label>Creator</label>
+                        <input disabled type="text" th:value="*{creator.username}" class="form-control">
+
+                        <br>
                         <label>Discount</label>
                         <input type="number" th:value="*{discountAmount}" min="0" max="100" maxlength="3" name="discountAmount" class="form-control">
+
+                        <br>
+                        <label>Status</label>
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   th:field="*{status}"
+                                   th:value="*{status}"
+                                   id="status">
+                            <label class="form-check-label" for="status">Disetujui</label>
+                        </div>
+
 
                         <br>
                         <label>ExpiryDate</label>
@@ -41,7 +66,7 @@
                         </div>
 
                         <br>
-                        <a class="btn btn-link" href="/">Home</a>
+                        <a class="btn btn-link" href="/coupon/viewall">Back</a>
                         <button type="submit" class="btn btn-warning">Save</button>
                     </form>
                 </div>
@@ -51,4 +76,3 @@
 </div>
 </body>
 </html>
-

@@ -60,6 +60,25 @@ public class CouponController {
         return "message";
     }
 
+    @GetMapping("/update/{id}")
+    private String updateCouponForm(Model model, @PathVariable Long id){
+        CouponModel coupon = couponService.getCouponById(id);
+
+        model.addAttribute("listCouponType", typeService.getCouponList());
+        model.addAttribute("coupon", coupon);
+        return "form-update-coupon";
+    }
+
+    @PostMapping("/update")
+    private String addCoupon(
+            Model model,
+            @ModelAttribute CouponModel coupon
+    ){
+        couponService.updateCoupon(coupon);
+        model.addAttribute("pesan", "Berhasil mengubah Coupon dengan nama " + coupon.getCouponName());
+        return "message";
+    }
+
     @GetMapping("/accept-request/{idCoupon}")
     private String acceptCouponRequest(@PathVariable Long idCoupon, Model model){
         couponService.acceptRequest(idCoupon);
