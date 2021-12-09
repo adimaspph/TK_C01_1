@@ -8,6 +8,7 @@ import tk.apap.sibusiness.model.UserModel;
 import tk.apap.sibusiness.repository.CouponDB;
 
 import javax.transaction.Transactional;
+import java.text.DecimalFormat;
 import java.util.*;
 
 @Service
@@ -29,15 +30,16 @@ public class CouponServiceImpl implements CouponService{
 
     @Override
     public void addCoupon(CouponModel coupon, String username) {
-        String code = couponRestService.generateCouponCode(coupon);
-        coupon.setCouponCode(code);
         UserModel user = userService.getUserByUsername(username);
         coupon.setCreator(user);
 
         if (user.getRole().getRole().equals("Staff_Marketing")) {
             coupon.setStatus(true);
+            String code = couponRestService.generateCouponCode(coupon);
+            coupon.setCouponCode(code);
         } else {
             coupon.setStatus(false);
+            coupon.setCouponCode("");
         }
         couponDB.save(coupon);
     }
@@ -52,6 +54,10 @@ public class CouponServiceImpl implements CouponService{
         Optional<CouponModel> couponModel = couponDB.findById(idCoupon);
         CouponModel coupon = couponModel.get();
         coupon.setStatus(true);
+
+        String code = couponRestService.generateCouponCode(coupon);
+        coupon.setCouponCode(code);
+
         couponDB.save(coupon);
     }
 
