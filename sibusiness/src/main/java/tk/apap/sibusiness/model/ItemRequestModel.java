@@ -1,6 +1,8 @@
 package tk.apap.sibusiness.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +23,7 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name="itemRequest")
+@JsonIgnoreProperties(ignoreUnknown = true)
 
 public class ItemRequestModel {
 
@@ -30,19 +33,23 @@ public class ItemRequestModel {
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String uuid;
 
+    @JsonProperty("nama")
     @NotNull
     @Size(max = 50)
     @Column(name = "nama", nullable = false)
     private String nama;
 
+    @JsonProperty("harga")
     @NotNull
     @Column(name = "harga", nullable = false)
     private Integer harga;
 
+    @JsonProperty("stok")
     @NotNull
     @Column(name = "stok", nullable = false)
     private Integer stok;
 
+    @JsonProperty("kategori")
     @NotNull
     @Column(name = "kategori", nullable = false)
     private Integer kategori;
@@ -59,4 +66,5 @@ public class ItemRequestModel {
     @Size(max=50)
     @Column(nullable = false)
     private String cluster;
+
 }

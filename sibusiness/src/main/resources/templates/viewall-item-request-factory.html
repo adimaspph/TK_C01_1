@@ -42,7 +42,7 @@
       <td th:if="${itemRequest.status} == 2">Permintaan ditolak</td>
       <div sec:authorize="hasAuthority('Manager Business')">
         <td>
-          <a class="btn btn-primary" th:href="@{/}">Setuju</a>
+          <a class="btn btn-primary" th:href="@{/item-request/accept-item/} + ${itemRequest.uuid}">Setuju</a>
         </td>
         <td>
           <a class="btn btn-danger" th:href="@{/}">Tolak</a>

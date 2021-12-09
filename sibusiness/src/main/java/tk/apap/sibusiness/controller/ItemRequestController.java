@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 import tk.apap.sibusiness.model.CouponModel;
 import tk.apap.sibusiness.model.ItemRequestModel;
 import tk.apap.sibusiness.model.UserModel;
@@ -27,13 +28,20 @@ public class ItemRequestController {
 
     @GetMapping("/viewall")
     private String viewAllItemRequest(Model model){
-        System.out.println("halooo");
+        //System.out.println("halooo");
         List<ItemRequestModel> listItemRequest = itemRequestRestService.getAllRequestItem();
         model.addAttribute("listItemRequest", listItemRequest);
-        System.out.println(listItemRequest.toString());
+        //System.out.println(listItemRequest.toString());
         return "viewall-item-request-factory";
     }
 
+    @GetMapping(value = "/accept-item/{uuid}")
+    private String acceptItemRequest(Model model, @PathVariable String uuid){
+        ItemRequestModel itemRequest = itemRequestRestService.findItemRequestModelByUuid(uuid);
+        Mono result = itemRequestRestService.addItemToSIItem(itemRequest);
+        System.out.println(result.block());
+        return "home";
+    }
 }
 
 

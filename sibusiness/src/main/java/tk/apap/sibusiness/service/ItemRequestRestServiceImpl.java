@@ -1,10 +1,15 @@
 package tk.apap.sibusiness.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 import tk.apap.sibusiness.model.ItemRequestModel;
-import tk.apap.sibusiness.model.UserModel;
 import tk.apap.sibusiness.repository.ItemRequestDB;
+import tk.apap.sibusiness.rest.Setting;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -12,6 +17,13 @@ import java.util.List;
 @Service
 @Transactional
 public class ItemRequestRestServiceImpl implements ItemRequestRestService{
+    // INI NYOBA FITUR 15
+    private final WebClient webClient;
+
+    public ItemRequestRestServiceImpl(WebClient.Builder webClientBuilder){
+        this.webClient = webClientBuilder.baseUrl(Setting.siItemUrl).build();
+    }
+
     @Autowired
     private ItemRequestDB itemRequestDB;
 
@@ -31,4 +43,34 @@ public class ItemRequestRestServiceImpl implements ItemRequestRestService{
         itemRequestModel.setStatus(0);
         return itemRequestDB.save(itemRequestModel);
     }
+
+    @Override
+    public Mono<String> addItemToSIItem(ItemRequestModel itemRequestModel) {
+        //return this.webClient
+        Mono<String> i = this.webClient
+                .post()
+                .uri("api/item")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(Mono.just(itemRequestModel), ItemRequestModel.class)
+                //.bodyValue(itemRequestModel)
+                .accept(MediaType.ALL)
+                .retrieve()
+                .bodyToMono(String.class);
+        return i;
+    }
+//        MultiValueMap<String, Object> data = new LinkedMultiValueMap<>();
+//        data.add("harga", itemRequestModel.getHarga());
+//        data.add("kategori", itemRequestModel.getKategori());
+//        data.add("nama", itemRequestModel.getNama());
+//        data.add("stok", itemRequestModel.getStok());
+//        return this.webClient.post().uri("/api/item")
+//                .syncBody(data)
+//                .retrieve()
+//                .bodyToMono(String.class);
+
+    @Override
+    public ItemRequestModel findItemRequestModelByUuid(String uuid){
+        return itemRequestDB.findItemRequestModelByUuid(uuid);
+    }
+
 }
