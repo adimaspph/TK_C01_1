@@ -29,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers(HttpMethod.POST, "/api/**").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
+                .antMatchers("/api/list-coupon").permitAll()
                 .antMatchers("/user/**").hasAnyAuthority("Manager Business")
                 .antMatchers("/coupon/add/**").hasAnyAuthority("Staff_Product", "Staff_Marketing")
                 .antMatchers("/item-request/**").hasAnyAuthority("Manager Business")
