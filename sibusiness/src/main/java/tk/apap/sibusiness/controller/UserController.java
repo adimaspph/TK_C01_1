@@ -59,12 +59,52 @@ public class UserController {
         return "form-update-user";
     }
 
+    @GetMapping("/update/role/{username}")
+    private String formUpdateRoleUser(
+            Model model,
+            @PathVariable String username
+    ){
+        UserModel user = userService.getUserByUsername(username);
+        List<RoleModel> listRole = roleService.getListRole();
+
+        model.addAttribute("user", user);
+        model.addAttribute("listRole", listRole);
+        return "form-update-role-user";
+    }
+
     @PostMapping("/update")
     private String updateUser(
             Model model,
+            @RequestParam("passLama") String passLama,
+            @RequestParam("passKonfirm") String passKonfirm,
             @ModelAttribute UserModel user
     ){
-        userService.updateUser(user);
+        UserModel userLama = userService.getUserByUuid(user.getUuid());
+        List<RoleModel> listRole = roleService.getListRole();
+        Integer result =  userService.updateUser(user, passLama, passKonfirm);
+
+        model.addAttribute("listRole", listRole);
+        if (result == -1){
+            model.addAttribute("user", userLama);
+            model.addAttribute("error", "Password Lama Salah");
+            return "form-update-user";
+        } else if (result == 0) {
+            model.addAttribute("user", userLama);
+            model.addAttribute("error", "Password Konfirmasi Salah");
+            return "form-update-user";
+        }
+
+        model.addAttribute("pesan", "User dengan username: " + user.getUsername() + " berhasil diupdate!!");
+        return "message";
+    }
+
+    @PostMapping("/update/role")
+    private String updateRoleUser(
+            Model model,
+            @ModelAttribute UserModel user
+    ){
+        userService.updateUserRole(user);
+
         model.addAttribute("pesan", "User dengan username: " + user.getUsername() + " berhasil diupdate!!");
         return "message";
     }
