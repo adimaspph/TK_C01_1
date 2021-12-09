@@ -60,6 +60,12 @@ public class CouponServiceImpl implements CouponService{
     }
 
     @Override
+    public void deleteListType(Long idCoupon) {
+        couponDB.findById(idCoupon).get().setListType(null);
+        couponDB.save(couponDB.findById(idCoupon).get());
+    }
+
+    @Override
     public void deleteCoupon(Long idCoupon) {
         couponDB.deleteById(idCoupon);
     }

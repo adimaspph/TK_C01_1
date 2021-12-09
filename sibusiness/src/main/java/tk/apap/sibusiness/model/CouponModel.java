@@ -57,6 +57,7 @@ public class CouponModel implements Serializable {
     private UserModel creator;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = TypeModel.class)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinTable(
             name = "type_coupon",
             joinColumns = @JoinColumn(name = "coupon_id"),

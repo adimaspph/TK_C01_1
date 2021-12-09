@@ -11,5 +11,6 @@ public interface CouponService {
         String generateCouponCode(CouponModel couponModel);
         List<CouponModel> getCouponCreationList();
         void acceptRequest(Long idCoupon);
+        void deleteListType(Long idCoupon);
         void deleteCoupon(Long idCoupon);
 }
