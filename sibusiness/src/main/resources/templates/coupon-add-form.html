@@ -13,7 +13,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header"><b>Tambah Coupon Baru</b></div>
+                <div class="card-header bg-biru text-white"><h4 class="text-center">Tambah Coupon Baru</h4></div>
                 <div class="card-body">
                     <form th:action="@{/coupon/add}" th:object="${coupon}" method="post">
                         <label>Coupon Name</label>
@@ -21,7 +21,7 @@
 
                         <br>
                         <label>Discount</label>
-                        <input type="number" th:value="*{discountAmount}" name="discountAmount" class="form-control">
+                        <input type="number" th:value="*{discountAmount}" min="0" max="100" maxlength="3" name="discountAmount" class="form-control">
 
                         <br>
                         <label>ExpiryDate</label>

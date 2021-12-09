@@ -27,10 +27,10 @@ public class ItemRequestController {
 
     @GetMapping("/viewall")
     private String viewAllItemRequest(Model model){
-        System.out.println("halooo");
+//        System.out.println("halooo");
         List<ItemRequestModel> listItemRequest = itemRequestRestService.getAllRequestItem();
         model.addAttribute("listItemRequest", listItemRequest);
-        System.out.println(listItemRequest.toString());
+//        System.out.println(listItemRequest.toString());
         return "viewall-item-request-factory";
     }
 
