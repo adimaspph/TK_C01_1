@@ -44,11 +44,7 @@
                         <input required class="form-control" type="password" name="passKonfirm" value="" />
                         <br>
 
-                        Role : <br>
-                        <select th:field="*{role}" name="role" class="form-control">
-                            <option th:each="role:${listRole}" th:value="${role.id}" th:text="${role.role}"></option>
-                        </select>
-                        <br>
+                        <input type="hidden" th:field="*{role}" name="role"/>
 
                         <a th:href="@{/user/viewall}" class="btn btn-outline-primary" >Back</a>
                         <button class="btn btn-primary" type="submit">Submit</button>
