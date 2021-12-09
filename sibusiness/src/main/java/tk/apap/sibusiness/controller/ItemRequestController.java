@@ -16,7 +16,7 @@ import tk.apap.sibusiness.service.TypeService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-import java.util. ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalTime;
 
@@ -28,10 +28,10 @@ public class ItemRequestController {
 
     @GetMapping("/viewall")
     private String viewAllItemRequest(Model model){
-        //System.out.println("halooo");
+        // System.out.println("halooo");
         List<ItemRequestModel> listItemRequest = itemRequestRestService.getAllRequestItem();
         model.addAttribute("listItemRequest", listItemRequest);
-        //System.out.println(listItemRequest.toString());
+        // System.out.println(listItemRequest.toString());
         return "viewall-item-request-factory";
     }
 

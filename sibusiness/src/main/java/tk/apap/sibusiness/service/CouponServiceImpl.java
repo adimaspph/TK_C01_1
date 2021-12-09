@@ -3,17 +3,21 @@ package tk.apap.sibusiness.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.apap.sibusiness.model.CouponModel;
+import tk.apap.sibusiness.model.TypeModel;
 import tk.apap.sibusiness.model.UserModel;
 import tk.apap.sibusiness.repository.CouponDB;
 
 import javax.transaction.Transactional;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
 public class CouponServiceImpl implements CouponService{
     @Autowired
     private CouponDB couponDB;
+
+    @Autowired
+    private CouponRestService couponRestService;
 
     @Autowired
     private UserService userService;
@@ -25,7 +29,7 @@ public class CouponServiceImpl implements CouponService{
 
     @Override
     public void addCoupon(CouponModel coupon, String username) {
-        String code = generateCouponCode(coupon);
+        String code = couponRestService.generateCouponCode(coupon);
         coupon.setCouponCode(code);
         UserModel user = userService.getUserByUsername(username);
         coupon.setCreator(user);
@@ -35,13 +39,24 @@ public class CouponServiceImpl implements CouponService{
         } else {
             coupon.setStatus(false);
         }
-//        System.out.println(coupon.getListType());
         couponDB.save(coupon);
     }
 
     @Override
-    public String generateCouponCode(CouponModel couponModel) {
-        //Belum diimplement
-        return "dummycode";
+    public List<CouponModel> getCouponCreationList() {
+        return couponDB.listCouponCreation();
+    }
+
+    @Override
+    public void acceptRequest(Long idCoupon) {
+        Optional<CouponModel> couponModel = couponDB.findById(idCoupon);
+        CouponModel coupon = couponModel.get();
+        coupon.setStatus(true);
+        couponDB.save(coupon);
+    }
+
+    @Override
+    public void deleteCoupon(Long idCoupon) {
+        couponDB.deleteById(idCoupon);
     }
 }

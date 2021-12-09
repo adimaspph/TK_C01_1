@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tk.apap.sibusiness.model.CouponModel;
 import tk.apap.sibusiness.service.ItemRestService;
@@ -29,5 +30,12 @@ public class ItemController {
 
         model.addAttribute("listAllItem", listItem);
         return "viewall-item";
+    }
+
+    @GetMapping("/{idItem}")
+    private String detailItem(Model model, @PathVariable String idItem){
+
+        model.addAttribute("item", itemRestService.getItemById(idItem));
+        return "detail-item";
     }
 }

@@ -15,6 +15,7 @@ import java.security.Principal;
 import java.util. ArrayList;
 import java.util.List;
 import java.time.LocalTime;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/coupon")
@@ -30,6 +31,13 @@ public class CouponController {
         List<CouponModel> listCoupon = couponService.getCouponList();
         model.addAttribute("listCoupon", listCoupon);
         return "viewall-coupon";
+    }
+
+    @GetMapping("/viewall-creation-request")
+    private String viewAllCouponCreation(Model model){
+        List<CouponModel> listCoupon = couponService.getCouponCreationList();
+        model.addAttribute("listCoupon", listCoupon);
+        return "viewall-coupon-creation-req";
     }
 
     @GetMapping("/add")
@@ -50,5 +58,17 @@ public class CouponController {
         couponService.addCoupon(coupon, principal.getName());
         model.addAttribute("pesan", "Berhasil menambah Coupon Baru dengan nama " + coupon.getCouponName());
         return "message";
+    }
+
+    @GetMapping("/accept-request/{idCoupon}")
+    private String acceptCouponRequest(@PathVariable Long idCoupon, Model model){
+        couponService.acceptRequest(idCoupon);
+        return "redirect:/coupon/viewall-creation-request";
+    }
+
+    @GetMapping("/delete-request/{idCoupon}")
+    private String deleteCouponRequest(@PathVariable Long idCoupon, Model model){
+        couponService.deleteCoupon(idCoupon);
+        return "redirect:/coupon/viewall-creation-request";
     }
 }
