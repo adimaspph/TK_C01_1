@@ -59,6 +59,19 @@ public class UserController {
         return "form-update-user";
     }
 
+    @GetMapping("/update/role/{username}")
+    private String formUpdateRoleUser(
+            Model model,
+            @PathVariable String username
+    ){
+        UserModel user = userService.getUserByUsername(username);
+        List<RoleModel> listRole = roleService.getListRole();
+
+        model.addAttribute("user", user);
+        model.addAttribute("listRole", listRole);
+        return "form-update-role-user";
+    }
+
     @PostMapping("/update")
     private String updateUser(
             Model model,
@@ -80,6 +93,17 @@ public class UserController {
             model.addAttribute("error", "Password Konfirmasi Salah");
             return "form-update-user";
         }
+
+        model.addAttribute("pesan", "User dengan username: " + user.getUsername() + " berhasil diupdate!!");
+        return "message";
+    }
+
+    @PostMapping("/update/role")
+    private String updateRoleUser(
+            Model model,
+            @ModelAttribute UserModel user
+    ){
+        userService.updateUserRole(user);
 
         model.addAttribute("pesan", "User dengan username: " + user.getUsername() + " berhasil diupdate!!");
         return "message";
