@@ -37,10 +37,10 @@ public class CabangController {
 
     @PostMapping(value = "/create")
     private String addUserSubmit(@ModelAttribute CabangDetail cabang, Model model) {
-        System.out.println(cabang.getNamaCabang());
-        System.out.println(cabang.getAlamatCabang());
-        System.out.println(cabang.getNoTelpCabang());
-        System.out.println(cabang.getAlamatCabang());
+//        System.out.println(cabang.getNamaCabang());
+//        System.out.println(cabang.getAlamatCabang());
+//        System.out.println(cabang.getNoTelpCabang());
+//        System.out.println(cabang.getAlamatCabang());
         cabangRestService.permintaanCabang(cabang);
         return "confirm-buka-cabang";
     }

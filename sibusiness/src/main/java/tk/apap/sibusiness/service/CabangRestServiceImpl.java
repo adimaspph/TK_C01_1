@@ -30,13 +30,13 @@ public class CabangRestServiceImpl implements CabangRestService{
         System.out.println(Mono.just(cabang).block());
         Mono<String> a = this.webClient
                 .post()
-                .uri("/rest/cabang/full")
+                .uri("/api/cabang/create")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(cabang), CabangDetail.class)
                 .accept(MediaType.ALL)
                 .retrieve()
                 .bodyToMono(String.class);
-//        System.out.println(a.block());
+        System.out.println(a.block());
         return a;
     }
 }
