@@ -33,6 +33,9 @@
         <div class="my-3 mt-4 d-flex justify-content-center animation-3">
             <a sec:authorize="hasAuthority('Manager Business')" th:href="@{/item-request/viewall}" class="mx-2 btn btn-primary">Lihat Daftar Item Request Factory</a>
         </div>
+        <div class="my-3 mt-4 d-flex justify-content-center animation-3">
+            <a sec:authorize="hasAuthority('Manager Business')" th:href="@{/cabang/create}" class="mx-2 btn btn-outline-primary">Buka Cabang</a>
+        </div>
     </div>
 </div>
 </body>
