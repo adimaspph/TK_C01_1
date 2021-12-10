@@ -32,9 +32,9 @@ public class ItemRequestController {
     }
 
     @GetMapping(value = "/accept-item/{uuid}")
-    private String acceptItemRequest(Model model, @PathVariable("uuid")  String uuid, Principal principal){
+    private String acceptItemRequest(Model model, @PathVariable("uuid")  String uuid, Principal principal) throws Exception {
         ItemRequestModel itemRequest = itemRequestRestService.findItemRequestModelByUuid(uuid);
-        //Mono result = itemRequestRestService.addItemToSIItem(itemRequest);
+        Mono result = (Mono) itemRequestRestService.addItemToSIItem(itemRequest);
         itemRequestRestService.acceptItemRequestStatus1(itemRequest, principal.getName());
         model.addAttribute("itemRequest", itemRequest);
         //System.out.println(result.block());
