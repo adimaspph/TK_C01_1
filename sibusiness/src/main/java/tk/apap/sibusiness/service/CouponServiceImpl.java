@@ -26,7 +26,13 @@ public class CouponServiceImpl implements CouponService{
 
     @Override
     public List<CouponModel> getCouponList() {
-        return couponDB.findAll();
+        List<CouponModel> listCouponTrue = new ArrayList<>();
+        for (CouponModel coupon : couponDB.findAll()){
+            if (coupon.getStatus() == true){
+                listCouponTrue.add(coupon);
+            }
+        }
+        return listCouponTrue;
     }
 
     @Override
