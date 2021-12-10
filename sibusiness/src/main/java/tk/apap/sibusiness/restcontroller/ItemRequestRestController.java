@@ -3,6 +3,7 @@ package tk.apap.sibusiness.restcontroller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,21 +31,51 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api")
-public class ItemRequestRestController {
+public class ItemRequestRestController extends Exception{
     @Autowired
     private ItemRequestRestService itemRequestRestService;
 
     @PostMapping(value = "/request-item")
-    private ItemRequestModel addItemRequest (@Valid @RequestBody ItemRequestModel itemRequestModel, BindingResult bindingResult){
-        if(bindingResult.hasFieldErrors()){
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field"
-            );
-        }else{
-            return itemRequestRestService.addItemRequest(itemRequestModel);
-            //return itemRequestModel;
+    private ResponseEntity addItemRequest (@Valid @RequestBody ItemRequestModel itemRequestModel, BindingResult bindingResult){
+        try{
+            System.out.println(bindingResult.hasErrors());
+            System.out.println(bindingResult.hasFieldErrors());
+            System.out.println(bindingResult.hasGlobalErrors());
+            if(bindingResult.hasFieldErrors()){
+                System.out.println("ayoolaa");
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field(1)"
+                );
+            }else{
+                ItemRequestModel mauAddItemRequest = itemRequestRestService.addItemRequest(itemRequestModel);
+                System.out.println("masuukkk woiii");
+                return ResponseEntity.ok(mauAddItemRequest);
+                //return itemRequestModel;
+            }
+        }
+        catch (Exception e) {
+            System.out.println("ayo dong");
+            return ResponseEntity.badRequest().body("Request body has invalid type or missing field");
         }
     }
+
+//    @PostMapping(value = "/request-item")
+//    private ItemRequestModel addItemRequest (@Valid @RequestBody ItemRequestModel itemRequestModel) {
+//        try {
+//            ItemRequestModel mauAddItemRequest = itemRequestRestService.addItemRequest(itemRequestModel);
+//            System.out.println("keprint");
+//            return mauAddItemRequest;
+//            //return itemRequestModel;
+//        } catch (NoSuchElementException e) {
+//            throw new ResponseStatusException(
+//                    HttpStatus.NOT_FOUND, "Item Not found."
+//            );
+//        } catch (Exception e) {
+//            throw new ResponseStatusException(
+//                    HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field"
+//            );
+//        }
+//    }
 
     @GetMapping(value = "/request-item")
     private String retrieveItemRequest(){
@@ -56,4 +87,5 @@ public class ItemRequestRestController {
             );
         }
     }
+
 }
