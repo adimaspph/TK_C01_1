@@ -54,4 +54,8 @@ public class UserModel {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private List<CouponModel> couponUser;
+
+    @OneToMany(mappedBy = "approver", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<ItemRequestModel> acceptedItem;
 }
