@@ -32,13 +32,12 @@ public class ItemRequestController {
     }
 
     @GetMapping(value = "/accept-item/{uuid}")
-    private String acceptItemRequest(Model model, @PathVariable("uuid")  String uuid){
+    private String acceptItemRequest(Model model, @PathVariable("uuid")  String uuid, Principal principal){
         ItemRequestModel itemRequest = itemRequestRestService.findItemRequestModelByUuid(uuid);
-        Mono result = itemRequestRestService.addItemToSIItem(itemRequest);
-        itemRequestRestService.acceptItemRequestStatus1(itemRequest);
-//        List<ItemRequestModel> listItemRequest = itemRequestRestService.getAllRequestItem();
-//        model.addAttribute("listItemRequest", listItemRequest);
-        System.out.println(result.block());
+        //Mono result = itemRequestRestService.addItemToSIItem(itemRequest);
+        itemRequestRestService.acceptItemRequestStatus1(itemRequest, principal.getName());
+        model.addAttribute("itemRequest", itemRequest);
+        //System.out.println(result.block());
         return "success-add-item-request";
     }
 
@@ -46,6 +45,7 @@ public class ItemRequestController {
     private String rejectItemRequest(@PathVariable("uuid") String uuid, Model model){
         ItemRequestModel itemRequest = itemRequestRestService.findItemRequestModelByUuid(uuid);
         itemRequestRestService.rejectItemRequestStatus2(itemRequest);
+        model.addAttribute("itemRequest", itemRequest);
         return "fail-add-item-request";
     }
 }

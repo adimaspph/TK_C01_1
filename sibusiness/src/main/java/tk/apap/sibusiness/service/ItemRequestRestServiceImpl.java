@@ -1,13 +1,16 @@
 package tk.apap.sibusiness.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import tk.apap.sibusiness.model.ItemRequestModel;
+import tk.apap.sibusiness.model.UserModel;
 import tk.apap.sibusiness.repository.ItemRequestDB;
 import tk.apap.sibusiness.rest.Setting;
 
@@ -27,6 +30,9 @@ public class ItemRequestRestServiceImpl implements ItemRequestRestService{
     @Autowired
     private ItemRequestDB itemRequestDB;
 
+    @Autowired
+    private UserService userService;
+
     @Override
     public List<ItemRequestModel> getAllRequestItem() {
         return itemRequestDB.findAll();
@@ -45,18 +51,24 @@ public class ItemRequestRestServiceImpl implements ItemRequestRestService{
     }
 
     @Override
-    public Mono<String> addItemToSIItem(ItemRequestModel itemRequestModel) {
+    public Mono<String> addItemToSIItem(ItemRequestModel itemRequestModel) throws Exception {
         //return this.webClient
-        Mono<String> i = this.webClient
-                .post()
-                .uri("api/item")
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(Mono.just(itemRequestModel), ItemRequestModel.class)
-                //.bodyValue(itemRequestModel)
-                .accept(MediaType.ALL)
-                .retrieve()
-                .bodyToMono(String.class);
-        return i;
+        try {
+            Mono<String> i = this.webClient
+                    .post()
+                    .uri("api/item")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(Mono.just(itemRequestModel), ItemRequestModel.class)
+                    //.bodyValue(itemRequestModel)
+                    .accept(MediaType.ALL)
+                    .retrieve()
+                    .bodyToMono(String.class);
+            return i;
+        }
+        catch (Exception e) {
+            System.out.println("ayo niii serviceee");
+            throw new Exception();
+        }
     }
 //        MultiValueMap<String, Object> data = new LinkedMultiValueMap<>();
 //        data.add("harga", itemRequestModel.getHarga());
@@ -82,7 +94,9 @@ public class ItemRequestRestServiceImpl implements ItemRequestRestService{
     }
 
     @Override
-    public ItemRequestModel acceptItemRequestStatus1(ItemRequestModel itemRequestModel) {
+    public ItemRequestModel acceptItemRequestStatus1(ItemRequestModel itemRequestModel, String nama) {
+        UserModel user = userService.getUserByUsername(nama);
+        itemRequestModel.setApprover(user);
         itemRequestModel.setStatus(1);
         return itemRequestDB.save(itemRequestModel);
     }

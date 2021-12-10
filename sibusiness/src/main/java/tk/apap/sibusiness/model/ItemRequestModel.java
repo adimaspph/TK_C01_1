@@ -58,9 +58,14 @@ public class ItemRequestModel {
     @Column(nullable = false)
     private Integer status;
 
-    @Size(max=200)
-    @Column(nullable = true)
-    private String approver;
+//    @Size(max=200)
+//    @Column(nullable = true)
+//    private String approver;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "approver", referencedColumnName = "uuid")
+    @JsonIgnore
+    private UserModel approver;
 
 //    @NotNull
 //    @Size(max=50)
