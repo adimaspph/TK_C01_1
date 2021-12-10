@@ -35,3 +35,4 @@ build/
 ### Lainnya ###
 application.properties
 .DS_Store
+**/.DS_Store
