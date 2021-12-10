@@ -21,7 +21,7 @@
       <th>Harga</th>
       <th>Stok</th>
       <th>Kategori</th>
-      <th>Cluster</th>
+<!--      <th>Cluster</th>-->
       <th>Status</th>
       <div sec:authorize="hasAuthority('Manager Business')">
         <th></th>
@@ -36,7 +36,7 @@
       <td th:text="${itemRequest.harga}"></td>
       <td th:text="${itemRequest.stok}"></td>
       <td th:text="${itemRequest.kategori}"></td>
-      <td th:text="${itemRequest.cluster}"></td>
+<!--      <td th:text="${itemRequest.cluster}"></td>-->
       <td th:if="${itemRequest.status} == 0">Permintaan belum disetujui</td>
       <td th:if="${itemRequest.status} == 1">Permintaan disetujui</td>
       <td th:if="${itemRequest.status} == 2">Permintaan ditolak</td>
@@ -45,7 +45,7 @@
           <a class="btn btn-primary" th:href="@{/item-request/accept-item/} + ${itemRequest.uuid}">Setuju</a>
         </td>
         <td>
-          <a class="btn btn-danger" th:href="@{/}">Tolak</a>
+          <a class="btn btn-danger" th:href="@{/item-request/reject-item/} + ${itemRequest.uuid}">Tolak</a>
         </td>
       </div>
     </tr>

@@ -62,9 +62,9 @@ public class ItemRequestModel {
     @Column(nullable = true)
     private String approver;
 
-    @NotNull
-    @Size(max=50)
-    @Column(nullable = false)
-    private String cluster;
+//    @NotNull
+//    @Size(max=50)
+//    @Column(nullable = false)
+//    private String cluster;
 
 }

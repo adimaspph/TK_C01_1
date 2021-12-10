@@ -12,6 +12,7 @@ import tk.apap.sibusiness.model.ItemRequestModel;
 import tk.apap.sibusiness.model.UserModel;
 import tk.apap.sibusiness.service.CouponService;
 import tk.apap.sibusiness.service.ItemRequestRestService;
+import tk.apap.sibusiness.service.ItemRequestRestServiceImpl;
 import tk.apap.sibusiness.service.TypeService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,19 +29,28 @@ public class ItemRequestController {
 
     @GetMapping("/viewall")
     private String viewAllItemRequest(Model model){
-        // System.out.println("halooo");
-        List<ItemRequestModel> listItemRequest = itemRequestRestService.getAllRequestItem();
+        List<ItemRequestModel> listItemRequest = itemRequestRestService.getItemRequestFromStatus();
         model.addAttribute("listItemRequest", listItemRequest);
         // System.out.println(listItemRequest.toString());
         return "viewall-item-request-factory";
     }
 
     @GetMapping(value = "/accept-item/{uuid}")
-    private String acceptItemRequest(Model model, @PathVariable String uuid){
+    private String acceptItemRequest(Model model, @PathVariable("uuid")  String uuid){
         ItemRequestModel itemRequest = itemRequestRestService.findItemRequestModelByUuid(uuid);
         Mono result = itemRequestRestService.addItemToSIItem(itemRequest);
+        itemRequestRestService.acceptItemRequestStatus1(itemRequest);
+//        List<ItemRequestModel> listItemRequest = itemRequestRestService.getAllRequestItem();
+//        model.addAttribute("listItemRequest", listItemRequest);
         System.out.println(result.block());
-        return "home";
+        return "success-add-item-request";
+    }
+
+    @GetMapping(value = "/reject-item/{uuid}")
+    private String rejectItemRequest(@PathVariable("uuid") String uuid, Model model){
+        ItemRequestModel itemRequest = itemRequestRestService.findItemRequestModelByUuid(uuid);
+        itemRequestRestService.rejectItemRequestStatus2(itemRequest);
+        return "fail-add-item-request";
     }
 }
 

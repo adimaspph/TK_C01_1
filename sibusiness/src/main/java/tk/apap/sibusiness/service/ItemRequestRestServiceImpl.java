@@ -31,15 +31,15 @@ public class ItemRequestRestServiceImpl implements ItemRequestRestService{
     public List<ItemRequestModel> getAllRequestItem() {
         return itemRequestDB.findAll();
     }
-
-    @Override
-    public Boolean deleteItemRequest(String uuid) {
-        return itemRequestDB.deleteItemRequestModelByUuid(uuid);
-    }
+//
+//    @Override
+//    public Boolean rejectItemRequest(String uuid) {
+//        return itemRequestDB.deleteItemRequestModelByUuid(uuid);
+//    }
 
     @Override
     public ItemRequestModel addItemRequest(ItemRequestModel itemRequestModel) {
-        itemRequestModel.setCluster("C01");
+        //itemRequestModel.setCluster("C01");
         itemRequestModel.setStatus(0);
         return itemRequestDB.save(itemRequestModel);
     }
@@ -73,4 +73,23 @@ public class ItemRequestRestServiceImpl implements ItemRequestRestService{
         return itemRequestDB.findItemRequestModelByUuid(uuid);
     }
 
+    @Override
+    public List<ItemRequestModel> getItemRequestFromStatus() {
+        List<ItemRequestModel> status1 = itemRequestDB.findItemRequestModelByStatus(1);
+        List<ItemRequestModel> status0 = itemRequestDB.findItemRequestModelByStatus(0);
+        status0.addAll(status1);
+        return status0;
+    }
+
+    @Override
+    public ItemRequestModel acceptItemRequestStatus1(ItemRequestModel itemRequestModel) {
+        itemRequestModel.setStatus(1);
+        return itemRequestDB.save(itemRequestModel);
+    }
+
+    @Override
+    public ItemRequestModel rejectItemRequestStatus2(ItemRequestModel itemRequestModel) {
+        itemRequestModel.setStatus(2);
+        return itemRequestDB.save(itemRequestModel);
+    }
 }
