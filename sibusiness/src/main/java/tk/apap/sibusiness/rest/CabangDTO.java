@@ -10,15 +10,15 @@ import java.util.Date;
 public class CabangDTO {
     private String status;
 
-    @JsonProperty("namaCabang")
-    private String namaCabang;
+    @JsonProperty("nama")
+    private String nama;
 
-    @JsonProperty("alamatCabang")
-    private String alamatCabang;
+    @JsonProperty("alamat")
+    private String alamat;
 
-    @JsonProperty("noTelpCabang")
-    private String noTelpCabang;
+    @JsonProperty("no_telp")
+    private String no_telp;
 
-    @JsonProperty("ukuranCabang")
-    private Integer ukuranCabang;
+    @JsonProperty("ukuran")
+    private Integer ukuran;
 }
