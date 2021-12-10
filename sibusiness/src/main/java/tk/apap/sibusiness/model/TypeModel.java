@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -30,6 +32,6 @@ public class TypeModel implements Serializable {
     @Column(nullable = false)
     private String useDay;
 
-    @ManyToMany(mappedBy = "listType", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = CouponModel.class)
+    @ManyToMany(mappedBy = "listType", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST}, targetEntity = CouponModel.class)
     private Set<CouponModel> listCoupon = new HashSet<>();
 }

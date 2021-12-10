@@ -35,7 +35,6 @@ public class CouponRestController {
         List<CouponModel> listCouponThisDay = new ArrayList<>();
 
         BaseResponseT<List<HashMap>> response = new BaseResponseT<>();
-
         for (CouponModel coupon : listCoupon) {
             Set<String> listUseDay = couponRestService.getDayOfWeek(coupon);
             String couponCode = couponRestService.generateCouponCode(coupon);

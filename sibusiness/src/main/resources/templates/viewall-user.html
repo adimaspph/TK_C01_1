@@ -21,7 +21,7 @@
         <p th:text="'Role : ' + ${user.role.role}"></p>
         <br>
         <a class="btn btn-primary bg-navy" sec:authorize="hasAuthority('Manager Business')" th:href="@{/user/update/} + ${user.username}">Update User</a>
-        <!--                <a sec:authorize="hasAuthority('MANAGER_BUSINESS') " class="btn btn-primary" th:href="@{/user/delete/} + ${user.id}">Delete User</a>-->
+        <!--                <a sec:authorize="hasAuthority('MANAGER_BUSINESS') " class="btn btn-primary" th:href="@{/userg/delete/} + ${user.id}">Delete User</a>-->
       </div>
     </div>
   </div>

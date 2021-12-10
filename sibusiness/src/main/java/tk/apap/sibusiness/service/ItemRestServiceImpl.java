@@ -33,4 +33,19 @@ public class ItemRestServiceImpl implements ItemRestService {
             return null;
         }
     }
+
+    @Override
+    public Map<String, Object> getItemById(String uuid) {
+
+        try {
+            Mono<Map> itemByKategori = this.webClient.get().uri("/api/item/" + uuid)
+                    .retrieve()
+                    .bodyToMono(Map.class);
+
+            Map item = (Map) itemByKategori.block().get("result");
+            return item;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
