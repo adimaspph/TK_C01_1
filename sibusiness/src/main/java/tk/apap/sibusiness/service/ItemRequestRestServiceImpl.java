@@ -61,6 +61,7 @@ public class ItemRequestRestServiceImpl implements ItemRequestRestService{
                 .accept(MediaType.ALL)
                 .retrieve()
                 .bodyToMono(String.class);
+        System.out.println(i.block());
         return i;
     }
 //        MultiValueMap<String, Object> data = new LinkedMultiValueMap<>();
