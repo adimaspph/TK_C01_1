@@ -51,24 +51,17 @@ public class ItemRequestRestServiceImpl implements ItemRequestRestService{
     }
 
     @Override
-    public Mono<String> addItemToSIItem(ItemRequestModel itemRequestModel) throws Exception {
-        //return this.webClient
-        try {
-            Mono<String> i = this.webClient
-                    .post()
-                    .uri("api/item")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .body(Mono.just(itemRequestModel), ItemRequestModel.class)
-                    //.bodyValue(itemRequestModel)
-                    .accept(MediaType.ALL)
-                    .retrieve()
-                    .bodyToMono(String.class);
-            return i;
-        }
-        catch (Exception e) {
-            System.out.println("ayo niii serviceee");
-            throw new Exception();
-        }
+    public Mono<String> addItemToSIItem(ItemRequestModel itemRequestModel) {
+        Mono<String> i = this.webClient
+                .post()
+                .uri("api/item")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(Mono.just(itemRequestModel), ItemRequestModel.class)
+                //.bodyValue(itemRequestModel)
+                .accept(MediaType.ALL)
+                .retrieve()
+                .bodyToMono(String.class);
+        return i;
     }
 //        MultiValueMap<String, Object> data = new LinkedMultiValueMap<>();
 //        data.add("harga", itemRequestModel.getHarga());
