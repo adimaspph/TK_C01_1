@@ -3,6 +3,7 @@ package tk.apap.sibusiness.restcontroller;
 import tk.apap.sibusiness.model.CouponModel;
 import tk.apap.sibusiness.repository.CouponDB;
 import tk.apap.sibusiness.service.CouponRestService;
+import tk.apap.sibusiness.rest.BaseResponseT;
 import tk.apap.sibusiness.service.CouponRestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,10 +29,12 @@ public class CouponRestController {
     private CouponRestService couponRestService;
 
     @GetMapping(value = "/list-coupon")
-    private List<HashMap> retrieveListCoupon() {
+    private BaseResponseT<List<HashMap>> retrieveListCoupon() {
         List<CouponModel> listCoupon = couponRestService.retrieveListCoupon();
         LocalDate now = LocalDate.now();
         List<CouponModel> listCouponThisDay = new ArrayList<>();
+
+        BaseResponseT<List<HashMap>> response = new BaseResponseT<>();
 
         for (CouponModel coupon : listCoupon) {
             Set<String> listUseDay = couponRestService.getDayOfWeek(coupon);
@@ -54,15 +57,19 @@ public class CouponRestController {
 
         List<HashMap> listCouponShow = new ArrayList<>();
         for (CouponModel coupon : listCouponThisDay) {
-            HashMap<String, String> detail = new HashMap<>();
-            detail.put("ID Coupon", coupon.getId().toString());
+            HashMap<String, Object> detail = new HashMap<>();
+            detail.put("ID Coupon", coupon.getId());
             detail.put("Coupon Code", coupon.getCouponCode());
             detail.put("Coupon Name", coupon.getCouponName());
-            detail.put("Discount Amount", Float.toString(coupon.getDiscountAmount()));
-            detail.put("Expiry Date", coupon.getExpiryDate().toString());
+            detail.put("Discount Amount", coupon.getDiscountAmount());
+            detail.put("Expiry Date", coupon.getExpiryDate());
             listCouponShow.add(detail);
         }
 
-        return listCouponShow;
+        response.setStatus(200);
+        response.setMessage("success");
+        response.setResult(listCouponShow);
+
+        return response;
     }
 }
