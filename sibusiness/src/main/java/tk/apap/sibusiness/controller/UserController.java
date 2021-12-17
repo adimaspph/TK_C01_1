@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tk.apap.sibusiness.model.RoleModel;
 import tk.apap.sibusiness.model.UserModel;
 import tk.apap.sibusiness.service.RoleService;
@@ -75,6 +76,7 @@ public class UserController {
     @PostMapping("/update")
     private String updateUser(
             Model model,
+            RedirectAttributes redir,
             @RequestParam("passLama") String passLama,
             @RequestParam("passKonfirm") String passKonfirm,
             @ModelAttribute UserModel user
@@ -94,18 +96,21 @@ public class UserController {
             return "form-update-user";
         }
 
-        model.addAttribute("pesan", "User dengan username: " + user.getUsername() + " berhasil diupdate!!");
-        return "message";
+        redir.addFlashAttribute("title", "Berhasil Update User");
+        redir.addFlashAttribute("message", "User dengan username " + user.getUsername() + " berhasil diupdate!!");
+        return "redirect:/user/viewall";
     }
 
     @PostMapping("/update/role")
     private String updateRoleUser(
             Model model,
+            RedirectAttributes redir,
             @ModelAttribute UserModel user
     ){
         userService.updateUserRole(user);
 
-        model.addAttribute("pesan", "User dengan username: " + user.getUsername() + " berhasil diupdate!!");
-        return "message";
+        redir.addFlashAttribute("title", "Berhasil Update Role User");
+        redir.addFlashAttribute("message", "User dengan username " + user.getUsername() + " berhasil diupdate!!");
+        return "redirect:/user/viewall";
     }
 }
