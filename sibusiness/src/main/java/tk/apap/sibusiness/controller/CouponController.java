@@ -5,9 +5,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tk.apap.sibusiness.model.CouponModel;
 import tk.apap.sibusiness.service.CouponService;
 import tk.apap.sibusiness.service.TypeService;
+import tk.apap.sibusiness.service.UserService;
 
 import java.security.Principal;
 import java.util.List;
@@ -20,6 +23,9 @@ public class CouponController {
 
     @Autowired
     private TypeService typeService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/viewall")
     private String viewAllCoupon(Model model){
@@ -45,14 +51,19 @@ public class CouponController {
 
     @PostMapping("/add")
     private String addCoupon(
-            Model model,
+            RedirectAttributes redir,
             @ModelAttribute CouponModel coupon,
-            Authentication auth,
             Principal principal
     ){
         couponService.addCoupon(coupon, principal.getName());
-        model.addAttribute("pesan", "Berhasil menambah Coupon Baru dengan nama " + coupon.getCouponName());
-        return "message";
+        redir.addFlashAttribute("title", "Coupon Berhasil Dibuat");
+        redir.addFlashAttribute("message", "Berhasil menambah Coupon Baru dengan nama " + coupon.getCouponName());
+
+        if (userService.getUserByUsername(principal.getName()).getRole().getRole().equals("Staff_Marketing")) {
+            return "redirect:/coupon/viewall";
+        } else {
+            return "redirect:/coupon/viewall-creation-request";
+        }
     }
 
     @GetMapping("/update/{id}")
@@ -66,12 +77,13 @@ public class CouponController {
 
     @PostMapping("/update")
     private String addCoupon(
-            Model model,
+            RedirectAttributes redir,
             @ModelAttribute CouponModel coupon
     ){
         couponService.updateCoupon(coupon);
-        model.addAttribute("pesan", "Berhasil mengubah Coupon dengan nama " + coupon.getCouponName());
-        return "message";
+        redir.addFlashAttribute("title", "Update Berhasil");
+        redir.addFlashAttribute("message", "Berhasil mengubah Coupon dengan nama " + coupon.getCouponName());
+        return "redirect:/coupon/viewall";
     }
 
     @GetMapping("/accept-request/{idCoupon}")
