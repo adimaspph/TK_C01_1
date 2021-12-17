@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,7 +11,9 @@
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFIBw8HfCJo="
             crossorigin="anonymous">
         </script>
-        <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js%22%3E"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </head>
     <head th:fragment="js">
 
@@ -21,7 +23,7 @@
 </head>
 <body>
 
-    <nav th:fragment="navbar" class="navbar navbar-dark bg-navy navbar-expand-lg" style="padding: 10px 25px;">
+    <nav th:fragment="navbar" class="navbar navbar-dark bg-navy navbar-expand-lg px-5" style="padding: 10px 25px;">
 
         <a class="navbar-brand font-weight-bold text-brown" href="/">
             SI-Business
@@ -35,24 +37,44 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
-<!--                <li class="nav-item dropdown">-->
-<!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                        Dropdown-->
-<!--                    </a>-->
-<!--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-<!--                        <a class="dropdown-item" href="#">Action</a>-->
-<!--                        <a class="dropdown-item" href="#">Another action</a>-->
-<!--                        <div class="dropdown-divider"></div>-->
-<!--                        <a class="dropdown-item" href="#">Something else here</a>-->
-<!--                    </div>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="#">Profile</a>-->
-<!--                </li>-->
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Coupon
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/coupon/viewall">Lihat Daftar Coupon</a>
+                        <a class="dropdown-item" href="/coupon/viewall-creation-request">Lihat Daftar Coupon Creation Request</a>
+                        <div sec:authorize="hasAnyAuthority('Staff_Product', 'Staff_Marketing')" class="dropdown-divider"></div>
+                        <a sec:authorize="hasAnyAuthority('Staff_Product', 'Staff_Marketing')" class="dropdown-item" href="/coupon/add">Tambah Coupon</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Item
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/item/viewall">Lihat Daftar Item</a>
+                        <a sec:authorize="hasAuthority('Manager Business')" class="dropdown-item" href="/item-request/viewall">Lihat Daftar Item Request Factory</a>
+                    </div>
+                </li>
+
+                <li sec:authorize="hasAuthority('Manager Business')" class="nav-item">
+                    <a class="nav-link" href="/cabang/create">Buka Cabang</a>
+                </li>
+
+                <li sec:authorize="hasAuthority('Manager Business')" class="nav-item">
+                    <a class="nav-link" href="/user/viewall">Lihat Daftar User</a>
+                </li>
+
+                <li sec:authorize="hasAnyAuthority('Manager Business', 'Staff_Product')" class="nav-item">
+                    <a class="nav-link" href="/mesin/viewall">Lihat Daftar Mesin</a>
+                </li>
 
             </ul>
             <ul class="navbar-nav pull-right">
-                <a class="nav-item nav-link active" th:href="@{/logout}">Logout</a>
+                <a class="nav-item nav-link" th:href="@{/logout}">Logout</a>
             </ul>
         </div>
     </nav>
