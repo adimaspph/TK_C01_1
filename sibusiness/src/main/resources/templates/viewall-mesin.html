@@ -12,6 +12,28 @@
 <div class="container">
     <br>
     <h2>Daftar Mesin</h2>
+    <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            Kategori
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" th:href="@{/mesin/viewall}">Semua</a>
+            <a class="dropdown-item" th:href="@{/mesin/view/kategori/1}">BUKU</a>
+            <a class="dropdown-item" th:href="@{/mesin/view/kategori/2}">DAPUR</a>
+            <a class="dropdown-item" th:href="@{/mesin/view/kategori/3}">MAKANAN & MINUMAN</a>
+            <a class="dropdown-item" th:href="@{/mesin/view/kategori/4}">ELEKTRONIK</a>
+            <a class="dropdown-item" th:href="@{/mesin/view/kategori/5}">FASHION</a>
+            <a class="dropdown-item" th:href="@{/mesin/view/kategori/6}">KECANTIKAN & PERAWATAN DIRI</a>
+            <a class="dropdown-item" th:href="@{/mesin/view/kategori/7}">FILM & MUSIK</a>
+            <a class="dropdown-item" th:href="@{/mesin/view/kategori/8}">GAMING</a>
+            <a class="dropdown-item" th:href="@{/mesin/view/kategori/9}">GADGET</a>
+            <a class="dropdown-item" th:href="@{/mesin/view/kategori/10}">KESEHATAN</a>
+            <a class="dropdown-item" th:href="@{/mesin/view/kategori/11}">RUMAH TANGGA</a>
+            <a class="dropdown-item" th:href="@{/mesin/view/kategori/12}">FURNITURE</a>
+            <a class="dropdown-item" th:href="@{/mesin/view/kategori/13}">ALAT & PERANGKAT KERAS</a>
+            <a class="dropdown-item" th:href="@{/mesin/view/kategori/14}">WEDDING</a>
+        </div>
+    </div>
     <br>
     <table class="table">
         <thead>
