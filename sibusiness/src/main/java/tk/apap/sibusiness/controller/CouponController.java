@@ -93,7 +93,11 @@ public class CouponController {
     }
 
     @GetMapping("/delete/coupon-type/{idCoupon}")
-    private String deleteTypeCouponRequest(@PathVariable Long idCoupon, Model model){
+    private String deleteTypeCouponRequest(
+            @PathVariable Long idCoupon,
+            Model model
+    ){
+        String coupon = couponService.getCouponById(idCoupon).getCouponName();
         couponService.deleteListType(idCoupon);
         return "redirect:/coupon/delete/{idCoupon}";
     }
@@ -101,6 +105,6 @@ public class CouponController {
     @GetMapping("/delete/{idCoupon}")
     private String deleteCouponRequest(@PathVariable Long idCoupon, Model model){
         couponService.deleteCoupon(idCoupon);
-        return "redirect:/coupon/viewall-creation-request";
+        return "redirect:/coupon/viewall";
     }
 }
