@@ -36,7 +36,7 @@
       <td th:text="${itemRequest.harga}"></td>
       <td th:text="${itemRequest.stok}"></td>
       <td th:text="${itemRequest.kategori}"></td>
-      <td></td>
+<!--      <td th:text="${itemRequest.approver.username}"></td>-->
       <td th:if="${itemRequest.status} == 0">Permintaan belum disetujui</td>
       <td th:if="${itemRequest.status} == 1">Permintaan disetujui</td>
       <td th:if="${itemRequest.status} == 2">Permintaan ditolak</td>
