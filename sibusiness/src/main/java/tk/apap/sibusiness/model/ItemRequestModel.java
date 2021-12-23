@@ -58,12 +58,9 @@ public class ItemRequestModel {
     @Column(nullable = false)
     private Integer status;
 
-//    @Size(max=200)
-//    @Column(nullable = true)
-//    private String approver;
-
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "approver", referencedColumnName = "uuid")
+    @JoinColumn(name = "approver", referencedColumnName = "uuid", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private UserModel approver;
 
