@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>400 Bad Request</title>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="align-content-center jumbotron container-fluid">
+    <h2>Error: 400 Bad Request</h2>
+    <a class="btn btn-primary" th:href="@{/}">Kembali ke Home</a>
+</div>
+
+</body>
+</html>
