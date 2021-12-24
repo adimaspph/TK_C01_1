@@ -32,10 +32,13 @@ public class UserController {
     }
 
     @PostMapping(value = "/add")
-    private String addUserSubmit(@ModelAttribute UserModel user, Model model) {
+    private String addUserSubmit(RedirectAttributes redir, @ModelAttribute UserModel user, Model model) {
 
         userService.addUser(user);
-        return "home";
+        redir.addFlashAttribute("title", "User Berhasil Dibuat");
+        redir.addFlashAttribute("message", "Berhasil menambah User Baru dengan username " + user.getUsername());
+
+        return "redirect:/user/viewall";
     }
 
     @GetMapping("/viewall")
