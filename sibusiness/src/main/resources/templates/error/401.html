@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>401 Unauthorized</title>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+</head>
+
+<body>
+<div class="align-content-center jumbotron container-fluid">
+    <h2>Error: 401 Unauthorized</h2>
+    <a class="btn btn-primary" th:href="@{/}">Kembali ke Home</a>
+</div>
+
+</body>
+</html>

@@ -59,7 +59,7 @@ public class ItemRequestModel {
     private Integer status;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "approver", referencedColumnName = "uuid", nullable = false)
+    @JoinColumn(name = "approver", referencedColumnName = "uuid")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private UserModel approver;
