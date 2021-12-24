@@ -40,13 +40,11 @@
             <td th:if="${coupon.status == true}" th:text="'Disetujui'"></td>
             <td th:if="${coupon.status == false}" th:text="'Belum Disetujui'"></td>
             <div sec:authorize="hasAuthority('Staff_Marketing')">
-                <!--fitur nomor 10-->
                 <td>
                     <a class="btn btn-primary" th:href="@{/coupon/accept-request/} + ${coupon.id}">Setuju</a>
                 </td>
-                <!--fitur nomor 11-->
                 <td>
-                    <a class="btn btn-danger" th:href="@{/coupon/delete/coupon-type/} + ${coupon.id}">Hapus</a>
+                    <a class="btn btn-danger" th:href="@{/coupon/delete/coupon-creation/coupon-type/} + ${coupon.id}">Hapus</a>
                 </td>
             </div>
         </tr>
