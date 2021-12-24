@@ -64,10 +64,6 @@ public class ItemRequestModel {
     @JsonIgnore
     private UserModel approver;
 
-    public String toString(){
-        return this.approver.getUsername();
-    }
-
 //    @NotNull
 //    @Size(max=50)
 //    @Column(nullable = false)
