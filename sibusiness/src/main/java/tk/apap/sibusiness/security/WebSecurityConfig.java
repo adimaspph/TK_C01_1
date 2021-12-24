@@ -26,12 +26,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/**").permitAll()
+                .antMatchers("/api/**").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/api/list-coupon").permitAll()
+                //.antMatchers("/user/**").permitAll()
                 .antMatchers("/user/**").hasAnyAuthority("Manager Business")
                 .antMatchers("/coupon/add/**").hasAnyAuthority("Staff_Product", "Staff_Marketing")
+                .antMatchers("/coupon/accept-request/**").hasAnyAuthority("Staff_Marketing")
+                .antMatchers("/coupon/delete/**").hasAnyAuthority("Staff_Marketing")
+                .antMatchers("/mesin/**").hasAnyAuthority("Staff_Product", "Manager Business")
                 .antMatchers("/item-request/**").hasAnyAuthority("Manager Business")
                 .anyRequest().authenticated()
                 .and()

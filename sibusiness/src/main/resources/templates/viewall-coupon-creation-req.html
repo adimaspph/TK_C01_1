@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title> Home </title>
+    <title> Coupon Creation Request </title>
     <object th:include="fragments/fragment :: head" th:remove="tag"></object>
 </head>
 
@@ -11,7 +11,7 @@
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="container">
     <br>
-    <h2>Daftar Permintaan Pembuatan Coupon</h2>
+    <h2>Daftar Coupon Creation Request</h2>
     <br>
     <table class="table">
         <thead>
@@ -40,13 +40,11 @@
             <td th:if="${coupon.status == true}" th:text="'Disetujui'"></td>
             <td th:if="${coupon.status == false}" th:text="'Belum Disetujui'"></td>
             <div sec:authorize="hasAuthority('Staff_Marketing')">
-                <!--fitur nomor 10-->
                 <td>
                     <a class="btn btn-primary" th:href="@{/coupon/accept-request/} + ${coupon.id}">Setuju</a>
                 </td>
-                <!--fitur nomor 11-->
                 <td>
-                    <a class="btn btn-danger" th:href="@{/coupon/delete-request/} + ${coupon.id}">Hapus</a>
+                    <a class="btn btn-danger" th:href="@{/coupon/delete/coupon-creation/coupon-type/} + ${coupon.id}">Hapus</a>
                 </td>
             </div>
         </tr>
