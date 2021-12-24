@@ -13,19 +13,32 @@
   <br>
   <h2>Daftar Seluruh User</h2>
   <br>
-  <div th:each="user : ${listUser}" class="card m-4 p-4">
-    <div class="card-body">
-      <div class="justify-content-center">
-        <p th:text="'ID : ' + ${user.uuid}"></p>
-        <p th:text="'Username : ' + ${user.username}"></p>
-        <p th:text="'Role : ' + ${user.role.role}"></p>
-        <br>
-        <a class="btn btn-primary" sec:authorize="hasAuthority('Manager Business')" th:href="@{/user/update/} + ${user.username}">Update User</a>
-        <a class="btn btn-outline-primary" sec:authorize="hasAuthority('Manager Business')" th:href="@{/user/update/role/} + ${user.username}">Update Role</a>
-        <!--                <a sec:authorize="hasAuthority('MANAGER_BUSINESS') " class="btn btn-primary" th:href="@{/userg/delete/} + ${user.id}">Delete User</a>-->
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Role</th>
+      <div sec:authorize="hasAuthority('Manager Business')">
+        <th></th>
+        <th>Action</th>
       </div>
-    </div>
-  </div>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${listUser}">
+      <td th:text="${user.uuid}"></td>
+      <td th:text="${user.username}"></td>
+      <td th:text="${user.role.role}"></td>
+        <td>
+          <a class="btn btn-primary" sec:authorize="hasAuthority('Manager Business')" th:href="@{/user/update/} + ${user.username}">Update User</a>
+        </td>
+        <td>
+          <a class="btn btn-outline-primary" sec:authorize="hasAuthority('Manager Business')" th:href="@{/user/update/role/} + ${user.username}">Update Role</a>
+        </td>
+    </tr>
+    </tbody>
+  </table>
   <br>
   <div class="d-flex justify-content-right">
     <a class="mx-2 btn btn-primary" sec:authorize="hasAuthority('Manager Business')" th:href="@{/user/add/}">Add User</a>
