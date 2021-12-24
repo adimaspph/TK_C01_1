@@ -5,4 +5,5 @@ import tk.apap.sibusiness.model.UserModel;
 
 public interface UserDB extends JpaRepository<UserModel, Long> {
     UserModel findByUsername(String username);
+    UserModel findUserModelByUuid(String uuid);
 }

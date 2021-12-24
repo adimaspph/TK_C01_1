@@ -13,7 +13,7 @@
     <br>
     <h2>Daftar Seluruh Coupon</h2>
     <br>
-    <table class="table">
+    <table class="table" >
         <thead>
         <tr>
             <th>No</th>
@@ -23,7 +23,7 @@
             <th>Expiry Date</th>
             <th>Creator</th>
             <th>Status</th>
-            <div sec:authorize="hasAuthority('Manager Business')">
+            <div sec:authorize="hasAuthority('Staff_Marketing')">
                 <th></th>
                 <th>Action</th>
             </div>
@@ -39,14 +39,38 @@
             <td th:text="${coupon.creator.username}"></td>
             <td th:if="${coupon.status == true}" th:text="'Disetujui'"></td>
             <td th:if="${coupon.status == false}" th:text="'Belum Disetujui'"></td>
-            <div sec:authorize="hasAuthority('Manager Business')">
+            <div sec:authorize="hasAuthority('Staff_Marketing')">
                 <!--fitur nomor 10-->
                 <td>
-                    <a class="btn btn-primary" th:href="@{/}">Ubah</a>
+                    <a class="btn btn-primary" th:href="@{/coupon/update/} + ${coupon.id}">Ubah</a>
                 </td>
                 <!--fitur nomor 11-->
                 <td>
-                    <a class="btn btn-danger" th:href="@{/}">Hapus</a>
+<!--                    <a class="btn btn-danger" th:href="@{/coupon/delete/coupon-type/} + ${coupon.id}">Hapus</a>-->
+                    <a class="btn btn-danger btn-delete" th:href="@{/coupon/delete/coupon-type/} + ${coupon.id}">
+                        Hapus
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Hapus Kupon</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Apakah anda yakin ingin menghapus kupon ini?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Kembali</button>
+                                    <a type="button" id="btnDeleteYes" class="btn btn-danger">Hapus Kupon</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </div>
         </tr>
@@ -56,6 +80,18 @@
 </div>
 <br>
 
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+<script>
+    $('.btn-delete').on('click', function (e) {
+        e.preventDefault();
+        var href =$(this).attr('href');
+        $('#exampleModal #btnDeleteYes').attr('href', href);
+        $('#exampleModal').modal();
+    });
+</script>
 </body>
 
 </html>

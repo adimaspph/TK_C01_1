@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <object th:include="fragments/fragment :: head" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Permintaan Pembukaan Cabang</div>
+                <div class="card-body">
+                    <form th:action="@{/cabang/create}" th:object="${cabang}" method="POST">
+                        <label>Nama Cabang</label>
+                        <input type="text" name="nama" class="form-control">
+
+                        <label>Alamat Cabang</label>
+                        <input type="text" name="alamat" class="form-control">
+
+                        <label>No Telepon Cabang</label>
+                        <input type="text" name="no_telp" class="form-control">
+
+                        <label>Ukuran (m²)</label>
+                        <input type="number" name="ukuran" class="form-control">
+
+                        <br>
+                        <button type="submit" class="btn btn-warning">Submit</button>
+                        <a class="btn btn-link" href="/">Home</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
