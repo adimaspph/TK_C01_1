@@ -9,35 +9,56 @@
 
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
+<section class="about full-screen d-lg-flex justify-content-center align-items-center" id="about">
+    <div class="container">
+        <div class="row">
 
-<div class="d-flex justify-content-center" style="padding-top: 70px;">
-    <div class="m-4">
-        <h1 class="animation-1" style="text-align:center" th:text="'Hello ' + ${#httpServletRequest.remoteUser} + '!'">Login as</h1>
-        <h1 class="animation-1" style="text-align:center">
-            <span class="mr-2">Selamat datang di</span>
-            <span class="sibusiness">SI-Business.</span>
-        </h1>
-        <p class="animation-2" style="text-align:center">Sebuah sistem informasi yang dibangun untuk mengelola bisnis, khususnya bisnis APAP.</p>
-        <div class="my-3 mt-4 d-flex justify-content-center animation-3">
-<!--            <a href="#" class="btn btn-primary">Button</a>-->
-            <a th:href="@{/coupon/viewall}" class="mx-2 btn btn-primary">Lihat Daftar Coupon</a>
-            <a th:href="@{/coupon/viewall-creation-request}" class="mx-2 btn btn-primary">Lihat Daftar Coupon Creation Request</a>
-            <a sec:authorize="hasAnyAuthority('Staff_Product', 'Staff_Marketing')" th:href="@{/coupon/add}" class="mx-2 btn btn-outline-primary">Tambah Coupon</a>
-        </div>
-        <div class="my-3 mt-4 d-flex justify-content-center animation-3">
-            <a th:href="@{/item/viewall}" class="mx-2 btn btn-primary">Lihat Daftar Item</a>
-            <a sec:authorize="hasAuthority('Manager Business')" th:href="@{/item-request/viewall}" class="mx-2 btn btn-primary">Lihat Daftar Item Request Factory</a>
-        </div>
-        <div class="my-3 mt-4 d-flex justify-content-center animation-3">
-            <a sec:authorize="hasAuthority('Manager Business')" th:href="@{/user/viewall}" class="mx-2 btn btn-primary">Lihat Daftar User</a>
-        </div>
-        <div class="my-3 mt-4 d-flex justify-content-center animation-3">
-            <a sec:authorize="hasAnyAuthority('Manager Business', 'Staff_Product')" th:href="@{/mesin/viewall}" class="mx-2 btn btn-primary">Lihat Daftar Mesin</a>
-        </div>
-        <div class="my-3 mt-4 d-flex justify-content-center animation-3">
-            <a sec:authorize="hasAuthority('Manager Business')" th:href="@{/cabang/create}" class="mx-2 btn btn-outline-primary">Buka Cabang</a>
+            <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
+                <div class="about-text">
+                    <h1 class="animation-1" th:text="'Hello, ' + ${#httpServletRequest.remoteUser} + '!'">Login as</h1>
+                    <h1 class="animation-1" style="margin-bottom: 20px;">
+                        <span class="mr-2">Selamat datang di</span>
+                        <span class="sibusiness">SI-Business.</span>
+                    </h1>
+                    <p class="animated animated-text">
+                        <span class="mr-2">SI-Business merupakan sebuah platform yang memungkinkan kamu mengelola bisnis dengan cara lebih</span>
+                            <div class="animated-info">
+                                <span class="animated-item" style="font-weight:bold;">baik</span>
+                                <span class="animated-item" style="font-weight:bold;">teratur</span>
+                                <span class="animated-item" style="font-weight:bold;">terstruktur</span>
+                            </div>
+                    </p>
+
+                    <div class="mt-4">
+                        <div class="my-3 mt-4 d-flex justify-content-center animation-3">
+                            <!--            <a href="#" class="btn btn-primary">Button</a>-->
+                            <a th:href="@{/coupon/viewall}" class="mx-2 btn btn-primary">Lihat Daftar Coupon</a>
+                            <a th:href="@{/coupon/viewall-creation-request}" class="mx-2 btn btn-primary">Lihat Daftar Coupon Creation Request</a>
+                            <a sec:authorize="hasAnyAuthority('Staff_Product', 'Staff_Marketing')" th:href="@{/coupon/add}" class="mx-2 btn btn-outline-primary">Tambah Coupon</a>
+                        </div>
+                        <div class="my-3 mt-4 d-flex justify-content-center animation-3">
+                            <a th:href="@{/item/viewall}" class="mx-2 btn btn-primary">Lihat Daftar Item</a>
+                            <a sec:authorize="hasAuthority('Manager Business')" th:href="@{/item-request/viewall}" class="mx-2 btn btn-primary">Lihat Daftar Item Request Factory</a>
+                        </div>
+                        <div class="my-3 mt-4 d-flex justify-content-center animation-3">
+                            <a sec:authorize="hasAuthority('Manager Business')" th:href="@{/user/viewall}" class="mx-2 btn btn-primary">Lihat Daftar User</a>
+                            <a sec:authorize="hasAnyAuthority('Manager Business', 'Staff_Product')" th:href="@{/mesin/viewall}" class="mx-2 btn btn-primary">Lihat Daftar Mesin</a>
+                        </div>
+                        <div class="my-3 mt-4 d-flex justify-content-center animation-3">
+                            <a sec:authorize="hasAuthority('Manager Business')" th:href="@{/cabang/create}" class="mx-2 btn btn-outline-primary">Buka Cabang</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5 col-md-12 col-12">
+                <div class="about-image svg">
+                    <img src="https://i.ibb.co/KhP8WkH/bg-image-1.png" alt="bg-image-1" border="0">
+                </div>
+            </div>
+
         </div>
     </div>
-</div>
+</section>
 </body>
 </html>
