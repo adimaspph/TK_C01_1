@@ -47,9 +47,9 @@
                 <!--fitur nomor 11-->
                 <td>
 <!--                    <a class="btn btn-danger" th:href="@{/coupon/delete/coupon-type/} + ${coupon.id}">Hapus</a>-->
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" id="submit">
+                    <a class="btn btn-danger btn-delete" th:href="@{/coupon/delete/coupon-type/} + ${coupon.id}">
                         Hapus
-                    </button>
+                    </a>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                          aria-hidden="true">
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Kembali</button>
-                                    <a class="btn btn-danger" th:href="@{/coupon/delete/coupon-type/} + ${coupon.id}">Hapus Kupon</a>
+                                    <a type="button" id="btnDeleteYes" class="btn btn-danger">Hapus Kupon</a>
                                 </div>
                             </div>
                         </div>
@@ -84,6 +84,14 @@
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 
+<script>
+    $('.btn-delete').on('click', function (e) {
+        e.preventDefault();
+        var href =$(this).attr('href');
+        $('#exampleModal #btnDeleteYes').attr('href', href);
+        $('#exampleModal').modal();
+    });
+</script>
 </body>
 
 </html>
