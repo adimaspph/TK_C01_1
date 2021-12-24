@@ -58,4 +58,8 @@ public class UserModel {
     @OneToMany(mappedBy = "approver", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<ItemRequestModel> acceptedItem;
+
+    public String toString(){
+        return this.getUsername();
+    }
 }
